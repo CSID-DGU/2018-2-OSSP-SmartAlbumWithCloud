@@ -29,7 +29,7 @@
         <string name="please_input_username">Please enter the username </string>
 
 
-        <string name="album">Smart Album with Cloud </string>
+        <string name="album">Album</string>
         <string name="photo">photo </string>
         <string name="open">open </string>
         <string name="close">close </string>
@@ -46,8 +46,8 @@
         <string name="send">send </string>
         <string name="detail">Details</string>
         <string name="delete">delete </string>
-        <string name="file_info"> file information: </string>
-        <string name="filepath">file path </string>
+        <string name="file_info"> File Information : </string>
+        <string name="filepath">File Path : </string>
         <string name="photo_detail">image details</string>
         <string name="sorry_not_found">Sorry, no eligible content was found</string>
         <string name="searching">Searching...</string>
