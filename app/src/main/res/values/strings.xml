@@ -1,59 +1,59 @@
 <resources>
-    <string name="app_name">快查相册</string>
+        <string name="app_name">quick check album </string>
 
 
-    <!--登陆模块-->
-    <string name="login_username">邮箱/手机号</string>
-    <string name="password">密码</string>
-    <string name="login">登陆</string>
-    <string name="reget_password">找回密码</string>
-    <string name="regist_now">现在注册</string>
-    <string name="please_input_phone_number">请输入手机号码</string>
-    <string name="please_input_verify_code">输入验证码</string>
-    <string name="get_verify_code">获取验证码</string>
-    <string name="please_input_password">请输入密码</string>
-    <string name="please_input_email">请输入邮箱</string>
-    <string name="confirm_password">确认密码</string>
-    <string name="regist">注册</string>
-    <string name="send_success">发送成功</string>
-    <string name="please_input_right_number">请输入正确的手机号码</string>
-    <string name="password_not_equal">两次输入密码不一致</string>
-    <string name="verification_error">验证码错误</string>
-    <string name="username_password_cannot_empty">账户和密码不能为空</string>
-    <string name="login_success">登陆成功</string>
-    <string name="connect_failure">连接服务器失败，请检查网络连接</string>
-    <string name="remember_password">记住密码</string>
-    <string name="login_failure">登陆失败，请检查账户和密码是否正确</string>
-    <string name="auto_login">自动登陆</string>
-    <string name="user_exist">该用户已存在，请直接登陆</string>
-    <string name="please_input_username">请输入用户名</string>
+        <!--Login Module-->
+        <string name="login_username">mail/phone number </string>
+        <string name="password">password</string>
+        <string name="login">login </string>
+        <string name="reget_password">Retrieve password </string>
+        <string name="regist_now">Register now</string>
+        <string name="please_input_phone_number">Please enter your mobile number </string>
+        <string name="please_input_verify_code">Enter the verification code </string>
+        <string name="get_verify_code">Get the verification code </string>
+        <string name="please_input_password">Please enter a password</string>
+        <string name="please_input_email">Please enter the email </string>
+        <string name="confirm_password"> confirm password </string>
+        <string name="regist">register </string>
+        <string name="send_success">Send successfully </string>
+        <string name="please_input_right_number">Please enter the correct mobile number </string>
+        <string name="password_not_equal">Inconsistent input passwords </string>
+        <string name="verification_error">Verification code error </string>
+        <string name="username_password_cannot_empty">Account and password cannot be empty</string>
+        <string name="login_success"> login success </string>
+        <string name="connect_failure">Failed to connect to the server, please check the network connection </string>
+        <string name="remember_password">remember password </string>
+        <string name="login_failure">Login failed, please check if the account and password are correct </string>
+        <string name="auto_login">automatic login</string>
+        <string name="user_exist">This user already exists, please log in directly </string>
+        <string name="please_input_username">Please enter the username </string>
 
 
-    <string name="album">相册</string>
-    <string name="photo">照片</string>
-    <string name="open">打开</string>
-    <string name="close">关闭</string>
-    <string name="setting">设置</string>
-    <string name="search">搜索</string>
-    <string name="username">张建浩</string>
+        <string name="album">Smart Album with Cloud </string>
+        <string name="photo">photo </string>
+        <string name="open">open </string>
+        <string name="close">close </string>
+        <string name="setting">Settings </string>
+        <string name="search">search </string>
+        <string name="username">Zhang Jianhao</string>
 
-    <string name="upload_img">上传照片</string>
-    <string name="find">查找</string>
-    <string name="advanced_finding">高级搜索</string>
-    <string name="take_photo">拍照</string>
-    <string name="share">分享</string>
-    <string name="save_failure">保存失败</string>
-    <string name="send">发送</string>
-    <string name="detail">详情</string>
-    <string name="delete">删除</string>
-    <string name="file_info">文件信息:</string>
-    <string name="filepath">文件路径</string>
-    <string name="photo_detail">图片详情</string>
-    <string name="sorry_not_found">抱歉没有找到符合条件的内容</string>
-    <string name="searching">正在搜索中...</string>
-    <string name="cloud">云端</string>
-    <string name="click_to_login">没有登陆无法查看云端照片,点击登陆</string>
-    <string name="share_information">快来使用快查相册吧,轻松管理相册，还有云备份哦</string>
+        <string name="upload_img">Upload photo </string>
+        <string name="find">find </string>
+        <string name="advanced_finding">Advanced Search</string>
+        <string name="take_photo">photograph </string>
+        <string name="share">share</string>
+        <string name="save_failure"> save failed </string>
+        <string name="send">send </string>
+        <string name="detail">Details</string>
+        <string name="delete">delete </string>
+        <string name="file_info"> file information: </string>
+        <string name="filepath">file path </string>
+        <string name="photo_detail">image details</string>
+        <string name="sorry_not_found">Sorry, no eligible content was found</string>
+        <string name="searching">Searching...</string>
+        <string name="cloud">cloud </string>
+        <string name="click_to_login">Unable to view cloud photos without login, click login </string>
+        <string name="share_information"> Come and use the quick check album, easily manage the album, and cloud backup </string>
 
 
 
