@@ -8,10 +8,9 @@
         android:id="@+id/photo_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2016年6月5日"
-        android:textSize="15sp"
         android:layout_marginTop="20dp"
-        />
+        android:text="2016년6월5일"
+        android:textSize="15sp" />
     <com.zjianhao.view.MyGridView
         android:id="@+id/photo_grid"
         android:layout_width="match_parent"

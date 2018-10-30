@@ -15,37 +15,34 @@
             android:id="@+id/info_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拍摄时间:"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:textSize="16dp"
+            android:text="Filming Date :"
             android:textColor="@color/text_gray"
 
-            />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/info_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2016年6月6日 12:45"
-            android:layout_toRightOf="@+id/info_time"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            />
+            android:layout_toRightOf="@+id/info_time"
+            android:text="2016-06-08"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/info_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="星期日"
             android:layout_below="@+id/info_time_tv"
             android:layout_alignLeft="@id/info_time_tv"
             android:layout_marginTop="6dp"
-            android:textColor="@color/text_gray"
+            android:text="Sunday"
 
-            />
+            android:textColor="@color/text_gray" />
 
 
 
@@ -147,27 +144,25 @@
             android:id="@+id/info_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="拍摄地点"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:textSize="16dp"
+            android:text="Filming Location :"
             android:textColor="@color/text_gray"
 
-            />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/info_location_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="暂无"
-            android:layout_toRightOf="@+id/info_location"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/info_location"
             android:maxLines="5"
-            />
+            android:text="Seoul"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
 
 

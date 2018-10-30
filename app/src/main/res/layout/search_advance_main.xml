@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
 
 
-                android:hint="照片名称"
+                android:hint="File Name"
 
                 />
 
@@ -84,7 +84,7 @@
                 android:id="@+id/photo_start_date"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="开始日期" />
+                android:hint="Start Date" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -112,7 +112,7 @@
                 android:id="@+id/photo_end_date"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:hint="终止日期" />
+                android:hint="End Date" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -161,9 +161,8 @@
                 android:id="@+id/photo_location_key"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="拍摄地点"
 
-                />
+                android:hint="Location" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -174,17 +173,18 @@
     </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/search_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/photo_location_rl"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/button_style"
-        android:text="搜索"
-        android:textColor="@color/white" />
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/photo_location_rl"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_style"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>
