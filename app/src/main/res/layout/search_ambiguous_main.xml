@@ -28,7 +28,6 @@
                 android:id="@+id/search_back"
                 />
 
-
             <EditText
                 android:id="@+id/search_keyword"
                 android:layout_width="match_parent"
@@ -53,14 +52,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
-
-
                 />
 
         </RelativeLayout>
-       
-        
-
 
     </android.support.v7.widget.Toolbar>
     
@@ -96,8 +90,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
-
-
                 />
             <ImageView
                 android:layout_width="wrap_content"
@@ -106,8 +98,6 @@
                 android:layout_above="@+id/search_remind_info"
                 android:layout_centerHorizontal="true"
                 />
-
-        
 
         </RelativeLayout>
 
@@ -129,9 +119,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
-
-
                 />
+
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -140,11 +129,6 @@
                 />
 
         </RelativeLayout>
-
-
-
-
-
 
     </FrameLayout>
     

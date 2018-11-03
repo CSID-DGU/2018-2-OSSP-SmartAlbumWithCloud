@@ -5,8 +5,6 @@
     android:background="@color/black"
     >
 
-
-
         <com.zjianhao.view.TouchImageView
             android:id="@+id/photo_detail_iv"
             android:layout_width="match_parent"
@@ -40,7 +38,6 @@
             android:layout_marginLeft="10dp"
             />
 
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -48,8 +45,6 @@
         android:layout_height="80dp"
         android:layout_gravity="bottom"
         android:background="@color/mid_transparent"
-
-
         >
 
         <LinearLayout
@@ -60,9 +55,6 @@
             android:layout_toLeftOf="@+id/photo_delete_ll"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
-
-
-
             >
 
             <ImageView
@@ -78,7 +70,6 @@
                 android:text="@string/send"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-
                 />
 
         </LinearLayout>
@@ -89,7 +80,6 @@
             android:layout_height="50dp"
             android:orientation="vertical"
             android:layout_centerInParent="true"
-
             >
 
             <ImageView
@@ -107,7 +97,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:visibility="gone"
-
                 />
 
         </LinearLayout>
@@ -141,8 +130,4 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
-
-
 </FrameLayout>

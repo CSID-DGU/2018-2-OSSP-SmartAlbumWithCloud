@@ -70,11 +70,11 @@ public class AppContext extends Application {
     }
 
     /**
-     * 初始化
+     * Initialization
      */
     private void init() {
         initImageLoader(getApplicationContext());
-        //本地图片辅助类初始化
+        //Local Image Helper Class Initialization
         if (display == null) {
             WindowManager windowManager = (WindowManager)
                     getSystemService(Context.WINDOW_SERVICE);
@@ -91,7 +91,7 @@ public class AppContext extends Application {
         config.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         config.diskCacheSize(100 * 1024 * 1024); // 100 MiB
         config.tasksProcessingOrder(QueueProcessingType.LIFO);
-        //修改连接超时时间5秒，下载超时时间5秒
+        //Modify the connection timeout time of 5 seconds，Download timeout 5 seconds
         config.imageDownloader(new BaseImageDownloader(appContext, 5 * 1000, 5 * 1000));
         //		config.writeDebugLogs(); // Remove for release app
         // Initialize ImageLoader with configuration.
@@ -110,7 +110,7 @@ public class AppContext extends Application {
     }
     /**
      * @return
-     * @Description： 获取当前屏幕的宽度
+     * @Description： Get the width of the current screen
      */
     public int getWindowWidth() {
         return display.getWidth();
@@ -118,7 +118,7 @@ public class AppContext extends Application {
 
     /**
      * @return
-     * @Description： 获取当前屏幕的高度
+     * @Description： Get the height of the current screen
      */
     public int getWindowHeight() {
         return display.getHeight();
@@ -126,7 +126,7 @@ public class AppContext extends Application {
 
     /**
      * @return
-     * @Description： 获取当前屏幕一半宽度
+     * @Description： Get the current screen half width
      */
     public int getHalfWidth() {
         return display.getWidth() / 2;
@@ -134,7 +134,7 @@ public class AppContext extends Application {
 
     /**
      * @return
-     * @Description： 获取当前屏幕1/4宽度
+     * @Description： Get the current screen 1/4 width
      */
     public int getQuarterWidth() {
         return display.getWidth() / 4;

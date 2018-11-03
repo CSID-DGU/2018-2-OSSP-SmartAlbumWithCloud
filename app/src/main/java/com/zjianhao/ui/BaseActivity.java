@@ -12,19 +12,21 @@ import com.zjianhao.album.AppManager;
 
 
 public class BaseActivity extends Activity {
-    //应用是否销毁标志
+    //Whether teh application destroys the flag
 	protected boolean isDestroy;
-	//防止重复点击设置的标志，涉及到点击打开其他Activity时，将该标志设置为false，在onResume事件中设置为true
+	// a flag that prevents duplicate click settings，
+	// This is set to false when clicking to open other activities,
+	// Set to true in the OnResume event
 	private boolean clickable=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		isDestroy=false;
-		//设置无标题
+		//Set no title
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//垂直显示
+		// Vertical Display
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		// 添加Activity到堆栈
+		// Add Activity to the task
 		AppManager.getAppManager().addActivity(this);
 	}
 
@@ -32,19 +34,19 @@ public class BaseActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		isDestroy=true;
-		// 结束Activity&从堆栈中移除
+		// End Activity & Remove from Stack
 		AppManager.getAppManager().finishActivity(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//每次返回界面时，将点击标志设置为可点击
+		// Set the click flag to clickable each time you return to the interface
 		clickable=true;
 	}
 
 	/**
-	 * 当前是否可以点击
+	 * Is it currently possible to click
 	 * @return
 	 */
 	protected boolean isClickable(){
@@ -52,7 +54,7 @@ public class BaseActivity extends Activity {
 	}
 
 	/**
-	 * 锁定点击
+	 * Lock click
 	 */
 	protected void lockClick(){
 		clickable=false;

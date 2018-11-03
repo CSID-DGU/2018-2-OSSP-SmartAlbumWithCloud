@@ -76,9 +76,9 @@ public class AlbumPresenter {
                 Album a = map.get(name);
                 a.autoIncrementSize();
                 Map<String, List<Photo>> photoMap = a.getPhotoMap();
-                if (photoMap.containsKey(dateStr)){//包含此时间戳的图片则继续添加
+                if (photoMap.containsKey(dateStr)){//Image with this timestamp continue to be added
                     photoMap.get(dateStr).add(photo);
-                }else {//创建新的图片时间戳键值对
+                }else {//Create new image timestamp key-value pair
                     ArrayList<Photo> photos = new ArrayList<>();
                     photos.add(photo);
                     photoMap.put(dateStr,photos);
@@ -103,7 +103,7 @@ public class AlbumPresenter {
         if (cameras == null){
             cameras = new ArrayList<>(map.values()).get(0);
             if (cameras == null)
-                cameras = new Album("未知",0,null);
+                cameras = new Album("Unknown",0,null);
         }
         application.setCameraAlbum(cameras);
         for (OnFinishLoadAlbum listener : listeners) {

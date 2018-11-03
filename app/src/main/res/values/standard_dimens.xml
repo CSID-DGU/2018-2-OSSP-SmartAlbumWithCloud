@@ -10,7 +10,7 @@
     <dimen name="dividing_1">1dip</dimen>
     <dimen name="dividing_5">5dip</dimen>
     <dimen name="dividing_10">10dip</dimen>
-    <!-- 字体大小设置为dip 防止系统字体影响-->
+    <!-- Font size is set to dip /  Prevent system font -->
     <dimen name="textsize_10">10dip</dimen>
     <dimen name="textsize_11">11dip</dimen>
     <dimen name="textsize_12">12dip</dimen>

@@ -46,9 +46,9 @@ public class JsonUtil {
             photo.setName(p.getString("photoName"));
             photo.setDate(p.getLong("date"));
             String dateStr = TimeUtil.parseIntDate(photo.getDate());
-            if (photoMap.containsKey(dateStr)){//包含此时间戳的图片则继续添加
+            if (photoMap.containsKey(dateStr)){//The image containing this timestamp continues to be added
                 photoMap.get(dateStr).add(photo);
-            }else {//创建新的图片时间戳键值对
+            }else {//Create a new image timestamp key-value pair
                 ArrayList<Photo> photos = new ArrayList<>();
                 photos.add(photo);
                 photoMap.put(dateStr,photos);
@@ -58,7 +58,7 @@ public class JsonUtil {
         album.setPhotoMap(photoMap);
         ArrayList<GridPhoto> gridPhotos = album.mapToList();
         for (GridPhoto gridPhoto : gridPhotos) {
-            gridPhoto.setDateLabel("上传时间:"+gridPhoto.getDateLabel());
+            gridPhoto.setDateLabel("Upload time:"+gridPhoto.getDateLabel());
         }
         return gridPhotos;
     }

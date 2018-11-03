@@ -16,8 +16,8 @@ public class Photo implements Parcelable {
     private String name;
     private String imgUrl;
     private String thumbNailUrl;
-    private double longitude;//经度
-    private double latitude;//纬度
+    private double longitude;
+    private double latitude;
     private String location;
     private long date;
 

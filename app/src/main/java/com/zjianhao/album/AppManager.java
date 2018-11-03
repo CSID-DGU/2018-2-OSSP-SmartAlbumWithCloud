@@ -12,7 +12,7 @@ public class AppManager {
 	private static AppManager instance;
 	private AppManager(){}
 	/**
-	 * 单一实例
+	 * Single Instance
 	 */
 	public static AppManager getAppManager(){
 		if(instance==null){
@@ -21,7 +21,7 @@ public class AppManager {
 		return instance;
 	}
 	/**
-	 * 添加Activity到堆栈
+	 * Add Activity to the stack
 	 */
 	public void addActivity(Activity activity){
 		if(activityStack==null){
@@ -30,24 +30,24 @@ public class AppManager {
 		activityStack.add(activity);
 	}
 	/**
-	 * 获取当前Activity（堆栈中最后一个压入的）
+	 * Get the current Activity (the last one in the stack)
 	 */
 	public Activity currentActivity(){
 		Activity activity=activityStack.lastElement();
 		return activity;
 	}
 	/**
-	 * 结束当前Activity（堆栈中最后一个压入的）
+	 * End the current Activity(the last one in the stack)
 	 */
 	public void finishActivity(){
 		Activity activity=activityStack.lastElement();
 		finishActivity(activity);
 	}
 	/**
-	 * 结束指定的Activity
+	 * End of specified Activity
 	 */
 	public void finishActivity(Activity activity){
-//		//应用即将全部关闭，清理缓存
+//		// The app will close all, clean up the cache
 //		if(activityStack.size()==1){
 //			((AppContext)activity.getApplication()).clearWebViewCache();
 //
@@ -59,7 +59,7 @@ public class AppManager {
 		}
 	}
 	/**
-	 * 结束指定类名的Activity
+	 * End the activity of the specified class name
 	 */
 	public void finishActivity(Class<?> cls){
 		for (Activity activity : activityStack) {
@@ -68,7 +68,7 @@ public class AppManager {
 			}
 		}
 	}
-	//获取指定类名的Activity
+	//Get the activity of the specified class name
 	public Activity getActivity(Class<?> cls){
 		for (Activity activity : activityStack) {
 			if(activity.getClass().equals(cls) ){
@@ -79,7 +79,7 @@ public class AppManager {
 	}
 	
 	/**
-	 * 结束所有Activity
+	 * End all Activities
 	 */
 	public void finishAllActivity(){
 		for (int i = 0, size = activityStack.size(); i < size; i++){
@@ -90,7 +90,7 @@ public class AppManager {
 		activityStack.clear();
 	}
 	/**
-	 * 退出应用程序
+	 * Exit the app
 	 */
 	public void AppExit(Context context) {
 		try {
@@ -98,9 +98,5 @@ public class AppManager {
 			System.exit(0);
 		} catch (Exception e) {	}
 	}
-
-	
-
-	
 
 }

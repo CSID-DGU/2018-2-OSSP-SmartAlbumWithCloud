@@ -146,7 +146,7 @@ public class AmbigiousSearchAty extends AppCompatActivity implements PhotoAdapte
                 searchKeyword.clearFocus();
                 inputManager.hideSoftInputFromWindow(searchKeyword.getWindowToken(),0);
                 if (TextUtils.isEmpty(searchKeyword.getText()))
-                    ToastUtil.show(this, "请输入内容");
+                    ToastUtil.show(this, "Please enter content");
                 else {
                     isSearching.setVisibility(View.VISIBLE);
                     searchNotFound.setVisibility(View.GONE);

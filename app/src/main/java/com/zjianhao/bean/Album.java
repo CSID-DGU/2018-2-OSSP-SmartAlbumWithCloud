@@ -18,7 +18,7 @@ public class Album {
     private int size = 0;
     private String thumbnail;
 
-    private Map<String,List<Photo>> photoMap = new HashMap<>();//每个日期对应的图片
+    private Map<String,List<Photo>> photoMap = new HashMap<>();//Image Corresponding to each date
 
     public Map<String, List<Photo>> getPhotoMap() {
         return photoMap;

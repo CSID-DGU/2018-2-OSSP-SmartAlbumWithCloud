@@ -46,7 +46,7 @@
             android:background="@drawable/album_finish"
             android:textColor="#ffffff"
             android:layout_marginRight="20dp"
-            android:text="已选择(0)"
+            android:text="Chosen(0)"
             android:layout_height="30dip" />
 
     </RelativeLayout>
@@ -116,7 +116,7 @@
                 android:background="@drawable/album_finish"
                 android:textColor="#ffffff"
                 android:layout_marginRight="@dimen/padding_10"
-                android:text="已选择(0)"
+                android:text="Chosen(0)"
                 android:layout_height="30dip" />
 
             <CheckBox

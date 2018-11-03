@@ -11,11 +11,11 @@ import okio.Okio;
 import okio.Sink;
 
 public  class ProgressRequestBody extends RequestBody {
-    //实际的待包装请求体
+    //Actual to-be-packed request body
     private final RequestBody requestBody;
-    //进度回调接口
+    //Progress callback interface
     private final ProgressRequestListener progressListener;
-    //包装完成的BufferedSink
+    //Packaged completed Buffered Sink
     private BufferedSink bufferedSink;
     
     public interface ProgressRequestListener {
@@ -23,9 +23,9 @@ public  class ProgressRequestBody extends RequestBody {
     }
 
     /**
-     * 构造函数，赋值
-     * @param requestBody 待包装的请求体
-     * @param progressListener 回调接口
+     * Constructor, Assignment
+     * @param requestBody Request body to be wrapped
+     * @param progressListener Callback interface
      */
     public ProgressRequestBody(RequestBody requestBody, ProgressRequestListener progressListener) {
         this.requestBody = requestBody;
@@ -33,7 +33,7 @@ public  class ProgressRequestBody extends RequestBody {
     }
 
     /**
-     * 重写调用实际的响应体的contentType
+     * Rewrite the contentType of the actual response body
      * @return MediaType
      */
     @Override
@@ -42,9 +42,9 @@ public  class ProgressRequestBody extends RequestBody {
     }
 
     /**
-     * 重写调用实际的响应体的contentLength
+     * Rewrite the contentLength that calls the actual response body
      * @return contentLength
-     * @throws IOException 异常
+     * @throws IOException exception
      */
     @Override
     public long contentLength() throws IOException {
@@ -52,45 +52,45 @@ public  class ProgressRequestBody extends RequestBody {
     }
 
     /**
-     * 重写进行写入
+     * Rewrite to write
      * @param sink BufferedSink
-     * @throws IOException 异常
+     * @throws IOException exception
      */
     @Override
     public void writeTo(BufferedSink sink) throws IOException {
         if (bufferedSink == null) {
-            //包装
+            //package
             bufferedSink = Okio.buffer(sink(sink));
         }
-        //写入
+        //write
         requestBody.writeTo(bufferedSink);
-        //必须调用flush，否则最后一部分数据可能不会被写入
+        // must call flush, otherwise the last part of the data may not be written
         bufferedSink.flush();
 
     }
 
     /**
-     * 写入，回调进度接口
+     * Write, callback progress interface
      * @param sink Sink
      * @return Sink
      */
     private Sink sink(Sink sink) {
         return new ForwardingSink(sink) {
-            //当前写入字节数
+            //Current number of bytes written
             long bytesWritten = 0L;
-            //总字节长度，避免多次调用contentLength()方法
+            //Total byte length, avoid calling the contentLength() method multiple times
             long contentLength = 0L;
 
             @Override
             public void write(Buffer source, long byteCount) throws IOException {
                 super.write(source, byteCount);
                 if (contentLength == 0) {
-                    //获得contentLength的值，后续不再调用
+                    //Get the value of contentLength, no longer call later
                     contentLength = contentLength();
                 }
-                //增加当前写入的字节数
+                //Increase the number of bytes currently written
                 bytesWritten += byteCount;
-                //回调
+                //Callback
                 progressListener.onRequestProgress(bytesWritten, contentLength, bytesWritten == contentLength);
             }
         };

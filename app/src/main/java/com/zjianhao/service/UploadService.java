@@ -62,10 +62,10 @@ public class UploadService extends Service {
                     currentProgress = 100;
                     mNotification.setContentText(currentProgress+"%");
                     mNotification.setProgress(100,100,false);
-                    mNotification.setContentTitle("照片上传完成！");
+                    mNotification.setContentTitle("Photo upload completed！");
                     mNotificationManager.notify(1,mNotification.build());
-                    ToastUtil.show(getApplicationContext(),"上传完成");
-                    LogUtil.v(this,"上传完成,压缩了："+tempFile.size());
+                    ToastUtil.show(getApplicationContext(),"Upload Completed");
+                    LogUtil.v(this,"Upload completed, compressed："+tempFile.size());
                     delteTempFile();
                     break;
 
@@ -101,7 +101,7 @@ public class UploadService extends Service {
 
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotification = new NotificationCompat.Builder(this);
-        mNotification.setContentTitle("正在上传照片中");
+        mNotification.setContentTitle("Uploading Photos");
         mNotification.setSmallIcon(R.mipmap.ic_launcher);
         mNotification.setContentText("0%");
         mNotification.setProgress(100,0,false);

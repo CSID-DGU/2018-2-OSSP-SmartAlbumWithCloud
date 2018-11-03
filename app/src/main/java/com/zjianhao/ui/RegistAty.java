@@ -42,7 +42,7 @@ public class RegistAty extends AppCompatActivity implements View.OnClickListener
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0x00:
-                    ToastUtil.show(RegistAty.this,"请求错误，请检查网络连接");
+                    ToastUtil.show(RegistAty.this,"Reqeust Error, please check the network connection");
                     break;
                 case 0x01:
                     int result = Integer.parseInt((String)msg.obj);
@@ -53,7 +53,7 @@ public class RegistAty extends AppCompatActivity implements View.OnClickListener
                             finish();
                             break;
                         case -1:
-                            ToastUtil.show(RegistAty.this,"该用户信息已经存在");
+                            ToastUtil.show(RegistAty.this,"This user information already exists");
                             break;
 
                     }
@@ -88,7 +88,7 @@ public class RegistAty extends AppCompatActivity implements View.OnClickListener
         });
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mainToolbar.setTitleTextColor(Color.WHITE);
-        mainToolbar.setTitle("注册");
+        mainToolbar.setTitle("Registered");
 
 
     }

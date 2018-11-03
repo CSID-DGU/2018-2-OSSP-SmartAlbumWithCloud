@@ -97,14 +97,14 @@ public class PhotoDetailAty extends Activity {
 
     private void showDeleteDialog(final String filepath) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("确定要删除该图片吗?");
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        dialog.setMessage("Are you sure to delete this picture?");
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 File file = new File(filepath);
@@ -116,7 +116,7 @@ public class PhotoDetailAty extends Activity {
     }
 
     public void shareSingleImage() {
-        //由文件得到uri
+        // Get uri from file
         String url = photo.getImgUrl();
         Uri imageUri  = Uri.parse(photo.getImgUrl());
 
@@ -124,6 +124,6 @@ public class PhotoDetailAty extends Activity {
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
         shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, "分享到"));
+        startActivity(Intent.createChooser(shareIntent, "Share to"));
     }
 }

@@ -1,11 +1,10 @@
 <resources>
         <string name="app_name">quick check album </string>
 
-
         <!--Login Module-->
-        <string name="login_username">mail/phone number </string>
-        <string name="password">password</string>
-        <string name="login">login </string>
+        <string name="login_username">e-mail/phone number </string>
+        <string name="password">Password</string>
+        <string name="login">Login </string>
         <string name="reget_password">Retrieve password </string>
         <string name="regist_now">Register now</string>
         <string name="please_input_phone_number">Please enter your mobile number </string>
@@ -13,48 +12,44 @@
         <string name="get_verify_code">Get the verification code </string>
         <string name="please_input_password">Please enter a password</string>
         <string name="please_input_email">Please enter the email </string>
-        <string name="confirm_password"> confirm password </string>
-        <string name="regist">register </string>
+        <string name="confirm_password"> Confirm password </string>
+        <string name="regist">Register </string>
         <string name="send_success">Send successfully </string>
         <string name="please_input_right_number">Please enter the correct mobile number </string>
         <string name="password_not_equal">Inconsistent input passwords </string>
         <string name="verification_error">Verification code error </string>
         <string name="username_password_cannot_empty">Account and password cannot be empty</string>
-        <string name="login_success"> login success </string>
+        <string name="login_success"> Login success </string>
         <string name="connect_failure">Failed to connect to the server, please check the network connection </string>
-        <string name="remember_password">remember password </string>
+        <string name="remember_password">Remember password </string>
         <string name="login_failure">Login failed, please check if the account and password are correct </string>
-        <string name="auto_login">automatic login</string>
+        <string name="auto_login">Automatic login</string>
         <string name="user_exist">This user already exists, please log in directly </string>
         <string name="please_input_username">Please enter the username </string>
 
-
         <string name="album">Album</string>
-        <string name="photo">photo </string>
-        <string name="open">open </string>
-        <string name="close">close </string>
+        <string name="photo">Photo </string>
+        <string name="open">Open </string>
+        <string name="close">Close </string>
         <string name="setting">Settings </string>
-        <string name="search">search </string>
-        <string name="username">Zhang Jianhao</string>
+        <string name="search">Search </string>
+        <string name="username">Username</string>
 
         <string name="upload_img">Upload photo </string>
-        <string name="find">find </string>
+        <string name="find">Find </string>
         <string name="advanced_finding">Advanced Search</string>
-        <string name="take_photo">photograph </string>
-        <string name="share">share</string>
-        <string name="save_failure"> save failed </string>
-        <string name="send">send </string>
+        <string name="take_photo">Photograph </string>
+        <string name="share">Share</string>
+        <string name="save_failure"> Save failed </string>
+        <string name="send">Send </string>
         <string name="detail">Details</string>
-        <string name="delete">delete </string>
-        <string name="file_info"> File Information : </string>
+        <string name="delete">Delete </string>
+        <string name="file_info">File Information : </string>
         <string name="filepath">File Path : </string>
-        <string name="photo_detail">image details</string>
+        <string name="photo_detail">Image details</string>
         <string name="sorry_not_found">Sorry, no eligible content was found</string>
         <string name="searching">Searching...</string>
-        <string name="cloud">cloud </string>
+        <string name="cloud">Cloud </string>
         <string name="click_to_login">Unable to view cloud photos without login, click login </string>
         <string name="share_information"> Come and use the quick check album, easily manage the album, and cloud backup </string>
-
-
-
 </resources>

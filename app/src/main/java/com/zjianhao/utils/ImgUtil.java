@@ -14,7 +14,7 @@ import java.io.FileOutputStream;
 public class ImgUtil {
     public static File compressImage(String filePath, String targetPath, int quality)  {
         Bitmap bm = getSmallBitmap(filePath);
-        //旋转照片角度，省略
+        // Rotate the photo angle, omit
         /*int degree = readPictureDegree(filePath);
         if(degree!=0){
             bm=rotateBitmap(bm,degree);
@@ -35,11 +35,11 @@ public class ImgUtil {
 
     public static Bitmap getSmallBitmap(String filePath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;//只解析图片边沿，获取宽高
+        options.inJustDecodeBounds = true;// Only parse the edge of the image to get the width and height
         BitmapFactory.decodeFile(filePath, options);
-        // 计算缩放比
+        // Calculating the zoom ratio
         options.inSampleSize = calculateInSampleSize(options, 480, 800);
-        // 完整解析图片返回bitmap
+        // Full parsing image returns bitmap
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
     }
@@ -47,13 +47,13 @@ public class ImgUtil {
     private static int calculateInSampleSize(BitmapFactory.Options options, int i, int i1) {
         int w = options.outWidth;
         int h = options.outHeight;
-        float hh = 800f;//这里设置高度为800f
-        float ww = 480f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
+        float hh = 800f;//Set the height here is 800f
+        float ww = 480f;//Set the width here is 480f
+        // Zoom Ratio. Since it is a fixed scale scaling, only one of the data of height or width can be used for calculation.
+        int be = 1;//be=1 does not scale
+        if (w > h && w > ww) {// if the width is large, scale according to the fixed width
             be = (int) (options.outWidth / ww);
-        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
+        } else if (w < h && h > hh) {// If the height is high, scale according to the fixed width
             be = (int) (options.outHeight / hh);
         }
         if (be <= 0)

@@ -15,14 +15,10 @@
         android:orientation="vertical"
         android:gravity="center"
         >
-
-
-
     <RelativeLayout
         android:id="@+id/photo_name_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         >
 
         <android.support.design.widget.TextInputLayout
@@ -36,14 +32,10 @@
                 android:id="@+id/photo_name_key"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 android:hint="File Name"
-
                 />
 
         </android.support.design.widget.TextInputLayout>
-
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -51,9 +43,7 @@
             android:layout_toLeftOf="@+id/photo_name_state"
             android:gravity="center">
 
-
         </android.support.design.widget.TextInputLayout>
-
 
         <CheckBox
             android:id="@+id/photo_name_state"
@@ -88,7 +78,6 @@
 
         </android.support.design.widget.TextInputLayout>
 
-
         <CheckBox
             android:id="@+id/photo_date_state"
             android:layout_width="wrap_content"
@@ -106,7 +95,6 @@
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/photo_date_state"
             >
-
 
             <EditText
                 android:id="@+id/photo_end_date"
@@ -126,9 +114,7 @@
             android:text="——"
             />
 
-
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/photo_location_rl"
@@ -136,7 +122,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/photo_date_rl"
         android:layout_marginTop="30dp"
-
         >
 
         <CheckBox
@@ -156,23 +141,15 @@
             android:layout_toLeftOf="@+id/photo_location_state"
             >
 
-
             <EditText
                 android:id="@+id/photo_location_key"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:hint="Location" />
 
         </android.support.design.widget.TextInputLayout>
 
-
-
-
-
     </RelativeLayout>
-
-
         <Button
             android:id="@+id/search_btn"
             android:layout_width="match_parent"

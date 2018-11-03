@@ -11,7 +11,7 @@ import java.io.IOException;
 import static android.os.Environment.MEDIA_MOUNTED;
 
 /**
- * 文件操作类
+ * File Operation Class
  * Created by Nereo on 2015/4/8.
  */
 public class FileUtils {

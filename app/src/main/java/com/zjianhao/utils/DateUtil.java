@@ -9,26 +9,26 @@ public class DateUtil {
 
 
     public static boolean isDate(String keyword) {
-        if (keyword.matches("\\d{4}年"))
+        if (keyword.matches("\\d{4}year"))
             return true;
-        if (keyword.matches("\\d{2}月") || keyword.matches("\\d月"))
+        if (keyword.matches("\\d{2}month") || keyword.matches("\\dmonth"))
             return true;
-        if (keyword.matches("\\d{2}日") || keyword.matches("\\d日"))
+        if (keyword.matches("\\d{2}day") || keyword.matches("\\dday"))
             return true;
-        if (keyword.matches("\\d{4}-\\d{1,2}") || keyword.matches("\\d{4}年\\d{1,2}月"))
+        if (keyword.matches("\\d{4}-\\d{1,2}") || keyword.matches("\\d{4}year\\d{1,2}month"))
             return true;
-        if (keyword.matches("\\d{1,2}-\\d{1,2}") || keyword.matches("\\d{1,2}月\\d{1,2}日*"))
+        if (keyword.matches("\\d{1,2}-\\d{1,2}") || keyword.matches("\\d{1,2}year\\d{1,2}month*"))
             return true;
 
         if (keyword.matches("\\d{4}-\\d{1,2}-\\d{1,2}") ||
-                keyword.matches("\\d{4}年\\d{1,2}月\\d{1,2}日*"))
+                keyword.matches("\\d{4}year\\d{1,2}month\\d{1,2}day*"))
             return true;
         return false;
     }
 
 
     public static String parseToDate(String keyword){
-        keyword = keyword.replace("年","-").replace("月","-").replace("日","");
+        keyword = keyword.replace("year","-").replace("month","-").replace("day","");
         String[] split = keyword.split("-");
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < split.length; i++) {

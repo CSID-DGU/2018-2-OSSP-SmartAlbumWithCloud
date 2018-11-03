@@ -107,10 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         });
 
 
-
-
-
-
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mainToolbar, R.string.open, R.string.close);
         mActionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_menu_white_36dp);
         mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -156,8 +152,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             @Override
             public void onClick(View v) {
                 application.setUser(null);
-                headUsername.setText("请登陆");
-                ToastUtil.show(MainActivity.this,"已退出登陆");
+                headUsername.setText("Please Login");
+                ToastUtil.show(MainActivity.this,"Logged Out");
 
             }
         });
@@ -201,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         switch (requestCode) {
             case 0x01:
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED)
-                    Toast.makeText(this,"获取存储权限失败,将无法读取数据",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Failed to get storage permission, data cannot be read.",Toast.LENGTH_SHORT).show();
                 int resultCoarsePermission = ContextCompat.checkSelfPermission(this ,Manifest.permission.CAMERA);
                 if (resultCoarsePermission != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},0x02);
@@ -209,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 break;
             case 0x02:
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED)
-                    Toast.makeText(this,"获取拍照权限失败,将无法进行拍照",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Failed to take photo permission, photos cannot be taken.",Toast.LENGTH_SHORT).show();
 
                 break;
         }
@@ -280,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                             Intent intent = new Intent(this, UploadService.class);
                             intent.putStringArrayListExtra("upload_photos",path);
                             startService(intent);
-                            ToastUtil.show(this,"正在开始上传...");
+                            ToastUtil.show(this,"Start Uploading...");
                         }
                         for (String s : path) {
                             LogUtil.v(MainActivity.this,s);
@@ -361,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 }
 
                 else {
-                    ToastUtil.show(this,"上传请先登陆");
+                    ToastUtil.show(this,"Please login first");
                     Intent intent1 = new Intent(this,LoginAty.class);
                     startActivity(intent1);
                 }
@@ -388,10 +384,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         Intent intent=new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Share It");
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_information));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, "分享"));
+        startActivity(Intent.createChooser(intent, "Share It"));
 
     }
 

@@ -18,7 +18,7 @@ public class TimeUtil {
 
     public static String parseLongToString(long millions){
         Date date = new Date(millions);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyyearMMmonthddday HH:mm");
         return format.format(date);
     }
 

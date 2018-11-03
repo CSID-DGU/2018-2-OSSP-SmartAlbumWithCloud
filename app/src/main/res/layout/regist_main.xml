@@ -7,10 +7,6 @@
 
     <include layout="@layout/toolbar_layout"/>
 
-
-
-
-
     <EditText
         android:id="@+id/username_et"
         android:layout_width="fill_parent"
@@ -56,12 +52,5 @@
         android:text="@string/regist"
         android:textColor="@color/white"
         />
-
-
-
-
-
-
-
 
 </LinearLayout>

@@ -115,7 +115,7 @@ public class AdvancedSearchAty extends AppCompatActivity implements View.OnFocus
                     if (check != -1)
                     search();
                 }else {
-                    ToastUtil.show(this,"请至少选择一种搜索条件");
+                    ToastUtil.show(this,"Please select at least one search condition");
                 }
 
                 break;
@@ -128,7 +128,7 @@ public class AdvancedSearchAty extends AppCompatActivity implements View.OnFocus
         if (photoNameState.isChecked()){
             checkCount++;
             if (TextUtils.isEmpty(photoNameKey.getText())){
-                ToastUtil.show(this,"请输入照片名称");
+                ToastUtil.show(this,"Please enter a photo name");
                 return -1;
             }
         }
@@ -136,7 +136,7 @@ public class AdvancedSearchAty extends AppCompatActivity implements View.OnFocus
         if (photoDateState.isChecked()){
             checkCount++;
             if (TextUtils.isEmpty(photoStartDate.getText()) || TextUtils.isEmpty(photoEndDate.getText())){
-                ToastUtil.show(this,"起始日期不能全为空");
+                ToastUtil.show(this,"Start date cannot be empty");
                 return -1;
             }
         }
@@ -144,7 +144,7 @@ public class AdvancedSearchAty extends AppCompatActivity implements View.OnFocus
         if (photoLocationState.isChecked()){
             checkCount++;
             if (TextUtils.isEmpty(photoLocationKey.getText())){
-                ToastUtil.show(this,"请输入拍摄地点");
+                ToastUtil.show(this,"Please enter the location");
                 return -1;
             }
         }

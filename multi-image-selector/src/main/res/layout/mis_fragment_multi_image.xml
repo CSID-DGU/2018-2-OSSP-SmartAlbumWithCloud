@@ -29,7 +29,7 @@
             android:paddingRight="16dp"
             android:layout_centerVertical="true"
             android:textColor="@color/mis_folder_text_color"
-            tools:text="所有图片"
+            tools:text="All Pictures"
             android:textSize="16sp"
             android:gravity="center_vertical"
             android:drawableRight="@drawable/mis_text_indicator"

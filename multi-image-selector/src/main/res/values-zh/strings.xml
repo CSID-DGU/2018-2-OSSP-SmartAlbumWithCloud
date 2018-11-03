@@ -1,16 +1,16 @@
 <resources>
-         <string name="mis_folder_all">all photos</string>
-         <string name="mis_preview"> preview </string>
-         <string name="mis_msg_no_camera">no system camera</string>
+         <string name="mis_folder_all">All photos</string>
+         <string name="mis_preview"> Preview </string>
+         <string name="mis_msg_no_camera">No system camera</string>
          <string name="mis_msg_amount_limit">The highest number of choices has been reached</string>
          <string name="mis_action_done">Complete </string>
-         <string name="mis_photo_unit">张</string>
-         <string name="mis_tip_take_photo">take a photo </string>
-         <string name="mis_error_image_not_exist">image error</string>
-         <string name="mis_error_no_permission">no permission</string>
-         <string name="mis_permission_dialog_title"> permission denied </string>
-         <string name="mis_permission_dialog_ok">good</string>
-         <string name="mis_permission_dialog_cancel">reject </string>
+         <string name="mis_photo_unit">Unit</string>
+         <string name="mis_tip_take_photo">Take a photo </string>
+         <string name="mis_error_image_not_exist">Image error</string>
+         <string name="mis_error_no_permission">No permission</string>
+         <string name="mis_permission_dialog_title">Permission denied </string>
+         <string name="mis_permission_dialog_ok">Good</string>
+         <string name="mis_permission_dialog_cancel">Reject </string>
          <string name="mis_permission_rationale">Browse pictures requires you to provide permission to browse storage</string>
          <string name="mis_permission_rationale_write_storage">Save the photo picture you need to provide write storage permissions </string>
 </resources>

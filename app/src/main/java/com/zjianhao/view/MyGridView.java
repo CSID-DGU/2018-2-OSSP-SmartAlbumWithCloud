@@ -11,7 +11,7 @@ public class MyGridView extends GridView
     }  
 
   /** 
-     * 设置不滚动 
+     * Setting does not scroll
      */  
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec)  
     {  

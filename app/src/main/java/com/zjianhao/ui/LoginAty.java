@@ -54,7 +54,7 @@ public class LoginAty extends Activity implements View.OnClickListener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0x00:
-                    ToastUtil.show(LoginAty.this,"请求错误，请检查网络连接");
+                    ToastUtil.show(LoginAty.this,"Request error, please check the network connection");
                     break;
                 case 0x01:
                     String json = (String)msg.obj;
@@ -80,10 +80,10 @@ public class LoginAty extends Activity implements View.OnClickListener {
                     switch (result){
 
                         case -1:
-                            ToastUtil.show(LoginAty.this,"该用户不存在");
+                            ToastUtil.show(LoginAty.this,"this user does not exist");
                             break;
                         case 0:
-                            ToastUtil.show(LoginAty.this,"密码错误");
+                            ToastUtil.show(LoginAty.this,"Wrong Password");
                             break;
                     }
                     break;

@@ -77,7 +77,7 @@ public class CloudFragment extends Fragment implements PhotoAdapter.OnPhotoItemC
                             photos = JsonUtil.passeToList(object.getJSONArray("entity"));
 
                         }else {
-                            ToastUtil.show(getActivity(),"云端没有数据");
+                            ToastUtil.show(getActivity(),"No data in the cloud");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

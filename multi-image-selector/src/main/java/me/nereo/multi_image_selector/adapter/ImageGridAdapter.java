@@ -21,7 +21,7 @@ import me.nereo.multi_image_selector.R;
 import me.nereo.multi_image_selector.bean.Image;
 
 /**
- * 图片Adapter
+ * Picture Adapter
  * Created by Nereo on 2015/4/7.
  * Updated by nereo on 2016/1/19.
  */
@@ -57,7 +57,7 @@ public class ImageGridAdapter extends BaseAdapter {
         mGridWidth = width / column;
     }
     /**
-     * 显示选择指示器
+     * Display Selection Indicator
      * @param b
      */
     public void showSelectIndicator(boolean b) {
@@ -76,7 +76,7 @@ public class ImageGridAdapter extends BaseAdapter {
     }
 
     /**
-     * 选择某个图片，改变选择状态
+     * Select an Image，Change Selection Status
      * @param image
      */
     public void select(Image image) {
@@ -89,7 +89,7 @@ public class ImageGridAdapter extends BaseAdapter {
     }
 
     /**
-     * 通过图片路径设置默认选择
+     * Set Default Selection via Image Path
      * @param resultList
      */
     public void setDefaultSelected(ArrayList<String> resultList) {
@@ -116,7 +116,7 @@ public class ImageGridAdapter extends BaseAdapter {
     }
 
     /**
-     * 设置数据集
+     * Set Data Set
      * @param images
      */
     public void setData(List<Image> images) {
@@ -204,15 +204,15 @@ public class ImageGridAdapter extends BaseAdapter {
 
         void bindData(final Image data){
             if(data == null) return;
-            // 处理单选和多选状态
+            // Handling single and multiple selection states
             if(showSelectIndicator){
                 indicator.setVisibility(View.VISIBLE);
                 if(mSelectedImages.contains(data)){
-                    // 设置选中状态
+                    // Set selected state
                     indicator.setImageResource(R.drawable.mis_btn_selected);
                     mask.setVisibility(View.VISIBLE);
                 }else{
-                    // 未选择
+                    // Not Selected
                     indicator.setImageResource(R.drawable.mis_btn_unselected);
                     mask.setVisibility(View.GONE);
                 }
@@ -221,7 +221,7 @@ public class ImageGridAdapter extends BaseAdapter {
             }
             File imageFile = new File(data.path);
             if (imageFile.exists()) {
-                // 显示图片
+                // Display Image
                 Picasso.with(mContext)
                         .load(imageFile)
                         .placeholder(R.drawable.mis_default_error)

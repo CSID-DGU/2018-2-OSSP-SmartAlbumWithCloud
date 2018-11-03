@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import java.util.List;
 
 /**
- * 文件夹
+ * Folder
  * Created by Nereo on 2015/4/7.
  */
 public class Folder {

@@ -109,7 +109,7 @@ public class PhotoInfoAty extends AppCompatActivity {
         String size;
         if (len>1)
         size = getFileSize(len);
-        else size="未知";
+        else size="Unknown";
         infoSize.setText(size);
         infoFilepathTv.setText(photo.getImgUrl());
         getAddress(photo.getLatitude(),photo.getLongitude());

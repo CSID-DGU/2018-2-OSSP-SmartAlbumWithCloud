@@ -12,10 +12,6 @@
         android:orientation="vertical"
 
         >
-
-
-
-
         <EditText
             android:id="@+id/username_et"
             android:background="@null"
@@ -131,9 +127,6 @@
 
                 />
         </RelativeLayout>
-
-
-
 
     </LinearLayout>
     </LinearLayout>

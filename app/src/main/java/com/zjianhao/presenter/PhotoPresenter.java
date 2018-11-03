@@ -94,7 +94,8 @@ public class PhotoPresenter {
 
             }
         }
-        //要等所有的经纬度转化完全后才返回结果，此方法较为耗时
+        //Wait until all latitude and logitude conversions are complete before returning results.
+        //This takes a long time
         while(count>0);
 
 

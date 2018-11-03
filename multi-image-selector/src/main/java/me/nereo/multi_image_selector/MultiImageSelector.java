@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * 图片选择器
+ * Picture Selector
  * Created by nereo on 16/3/17.
  */
 public class MultiImageSelector {
