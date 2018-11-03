@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import com.SmartAlbumWithCloud.adapter.PhotoAdapter;
 import com.SmartAlbumWithCloud.adapter.PhotoAdapter.OnPhotoItemClickListener;
 import com.SmartAlbumWithCloud.album.AppContext;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 

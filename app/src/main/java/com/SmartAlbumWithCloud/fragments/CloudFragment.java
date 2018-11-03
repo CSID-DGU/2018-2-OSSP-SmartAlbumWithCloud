@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.SmartAlbumWithCloud.adapter.PhotoAdapter;
 import com.SmartAlbumWithCloud.album.AppContext;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.GridPhoto;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.bean.User;

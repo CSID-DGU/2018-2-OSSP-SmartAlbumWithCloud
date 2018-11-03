@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.SmartAlbumWithCloud.constants.Constants;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 
 import java.io.File;

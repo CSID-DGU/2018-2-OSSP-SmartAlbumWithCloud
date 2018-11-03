@@ -17,7 +17,7 @@ import com.SmartAlbumWithCloud.bean.User;
 import com.SmartAlbumWithCloud.constants.Constants;
 import com.SmartAlbumWithCloud.album.AppContext;
 import com.SmartAlbumWithCloud.album.MainActivity;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.utils.JsonUtil;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 import com.SmartAlbumWithCloud.utils.SharePreferenceUtils;

@@ -20,7 +20,7 @@ import com.SmartAlbumWithCloud.presenter.PhotoPresenter;
 import com.SmartAlbumWithCloud.adapter.GridAdapter;
 import com.SmartAlbumWithCloud.adapter.PhotoAdapter;
 import com.SmartAlbumWithCloud.album.AppContext;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Album;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.utils.DateUtil;

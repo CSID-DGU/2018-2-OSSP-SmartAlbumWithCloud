@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 
 /**
  * Created by 张建浩（Clarence) on 2016-6-20 17:05.

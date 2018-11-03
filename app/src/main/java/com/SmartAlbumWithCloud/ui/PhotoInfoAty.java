@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 import com.SmartAlbumWithCloud.utils.TimeUtil;

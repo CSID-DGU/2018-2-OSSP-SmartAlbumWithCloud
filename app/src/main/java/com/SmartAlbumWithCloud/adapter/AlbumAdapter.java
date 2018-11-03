@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.SmartAlbumWithCloud.bean.Album;
 import com.SmartAlbumWithCloud.holder.AlbumHolder;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 
 import java.util.List;
 

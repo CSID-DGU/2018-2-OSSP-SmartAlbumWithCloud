@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.SmartAlbumWithCloud.bean.GridPhoto;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.holder.PhotoHolder;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 
 import java.util.List;
 

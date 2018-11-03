@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.SmartAlbumWithCloud.presenter.PhotoPresenter;
 import com.SmartAlbumWithCloud.album.AppContext;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Photo;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 import com.SmartAlbumWithCloud.utils.ToastUtil;

@@ -8,8 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.SmartAlbumWithCloud.ui.AlbumDetailAty;
-import com.zjianhao.album.R;
-
+import com.SmartAlbumWithCloud.R;
 /**
  * Created by 张建浩（Clarence) on 2016-6-24 21:06.
  * the author's website:http://www.zjianhao.cn

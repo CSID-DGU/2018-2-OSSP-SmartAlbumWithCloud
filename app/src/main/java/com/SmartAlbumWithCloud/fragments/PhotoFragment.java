@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.SmartAlbumWithCloud.presenter.AlbumPresenter;
 import com.SmartAlbumWithCloud.adapter.PhotoAdapter;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Album;
 import com.SmartAlbumWithCloud.bean.GridPhoto;
 import com.SmartAlbumWithCloud.bean.Photo;

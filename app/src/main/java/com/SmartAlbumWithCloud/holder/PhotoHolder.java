@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 
 /**
  * Created by 张建浩（Clarence) on 2016-6-24 22:40.

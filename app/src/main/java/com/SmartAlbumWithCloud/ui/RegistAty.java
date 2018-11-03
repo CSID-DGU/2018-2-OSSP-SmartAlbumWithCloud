@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.SmartAlbumWithCloud.constants.Constants;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.utils.ToastUtil;
 
 import java.io.IOException;

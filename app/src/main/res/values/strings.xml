@@ -1,5 +1,5 @@
 <resources>
-        <string name="app_name">quick check album </string>
+        <string name="app_name">Smart Album with Cloud </string>
 
         <!--Login Module-->
         <string name="login_username">e-mail/phone number </string>

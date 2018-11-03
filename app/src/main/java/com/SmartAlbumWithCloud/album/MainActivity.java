@@ -26,6 +26,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +44,15 @@ import com.SmartAlbumWithCloud.ui.AdvancedSearchAty;
 import com.SmartAlbumWithCloud.ui.AmbigiousSearchAty;
 import com.SmartAlbumWithCloud.ui.LoginAty;
 import com.SmartAlbumWithCloud.adapter.MainTabAdapter;
-import com.zjianhao.album.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 import com.SmartAlbumWithCloud.utils.ToastUtil;
 
@@ -74,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     private ImageView logOutIv;
     private TextView headUsername;
-
+    private View googleLoginView;
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @InjectView(R.id.take_photo_fb)
@@ -90,10 +99,19 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private MediaScannerConnection msc;
     private ArrayList<String> selectPath = new ArrayList<>();
 
+    /** Google Sign In **/
+    private static final int RC_SIGN_IN = 9001;
+    private GoogleSignInClient mGoogleSignInClient = null;
+    private static GoogleSignInAccount mGoogleSignInAccount= null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mGoogleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         ButterKnife.inject(this);
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -116,14 +134,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-        init();
+        init(); // Add fragment
         callPermission();
-
-
-        adapter = new MainTabAdapter(getSupportFragmentManager(), fragments, titles);
-        viewpager.setAdapter(adapter);
-        mainTabLayout.setupWithViewPager(viewpager);
-        mainTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         View view = navigationView.inflateHeaderView(R.layout.drawer_head_view);
         navigationView.inflateMenu(R.menu.drawable_home_main);
@@ -131,7 +143,45 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         final AppContext application = (AppContext) getApplication();
         final User user = application.getUser();
 
+
+        /** Google Login Button Settings -by Ju Hun Choi **/
+        googleLoginView = view.findViewById(R.id.google_sign_in_button);
+        googleLoginView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                signIn();
+            }
+        });
         headUsername = (TextView)view.findViewById(R.id.head_username);
+
+        if(mGoogleSignInAccount == null){ // Not Logged In yet
+            googleLoginView.setVisibility(View.VISIBLE);
+            headUsername.setVisibility(View.INVISIBLE);
+            signIn();
+        }else { // Logged In
+            headUsername.setText(mGoogleSignInAccount.getId());
+            googleLoginView.setVisibility(View.INVISIBLE);
+            headUsername.setVisibility(View.VISIBLE);
+        }
+
+
+        adapter = new MainTabAdapter(getSupportFragmentManager(), fragments, titles);
+        viewpager.setAdapter(adapter);
+        mainTabLayout.setupWithViewPager(viewpager);
+        mainTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        logOutIv = (ImageView)view.findViewById(R.id.log_out);
+        logOutIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+                //updateUI();
+                ToastUtil.show(MainActivity.this,"Logged Out");
+
+            }
+        });
+        /****** End of Google Login *****/
+        /*
         headUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             }
         });
-
+*/
 
 
     }
@@ -184,10 +234,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             if(checkCallStoragePermission != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0x01);
             }
-
-
-
-
         }
 
     }
@@ -244,11 +290,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     }
 
-
-
-
-
-
     public void takePicture(){
         Intent intent = new Intent();
         intent.setAction("android.media.action.IMAGE_CAPTURE");
@@ -285,6 +326,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                     }
 
                 }
+                break;
+            case RC_SIGN_IN : // Google Sign In
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -394,6 +439,52 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
 
 
+    /** Google Sign In Actions - by Ju Hun Choi **/
+    private void signIn(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            mGoogleSignInAccount = completedTask.getResult(ApiException.class);
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("GoogleLogIn", "signInResult:failed code=" + e.getStatusCode());
+        }finally{
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("GoogleLogInAccount", mGoogleSignInAccount);
+            startService(intent);
+            finish();
+        }
+    }
+    // [END handleSignInResult]
+    // [START signOut]
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // [START_EXCLUDE]
+
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
+    // [END signOut]
+    public void updateUI(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("GoogleLogInAccount", mGoogleSignInAccount);
+        startService(intent);
+        finish();
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);

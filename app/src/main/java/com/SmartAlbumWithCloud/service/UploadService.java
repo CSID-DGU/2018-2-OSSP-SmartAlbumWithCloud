@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
 import com.SmartAlbumWithCloud.album.AppContext;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.User;
 import com.SmartAlbumWithCloud.constants.Constants;
 import com.SmartAlbumWithCloud.utils.ImgUtil;

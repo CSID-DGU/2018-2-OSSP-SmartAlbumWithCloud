@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.SmartAlbumWithCloud.presenter.AlbumPresenter;
 import com.SmartAlbumWithCloud.adapter.AlbumAdapter;
-import com.zjianhao.album.R;
+import com.SmartAlbumWithCloud.R;
 import com.SmartAlbumWithCloud.bean.Album;
 import com.SmartAlbumWithCloud.utils.LogUtil;
 
