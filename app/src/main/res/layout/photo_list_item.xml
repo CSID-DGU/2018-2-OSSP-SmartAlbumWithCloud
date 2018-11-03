@@ -11,7 +11,7 @@
         android:layout_marginTop="20dp"
         android:text="2016 - 06 - 30"
         android:textSize="15sp" />
-    <com.zjianhao.view.MyGridView
+    <com.SmartAlbumWithCloud.view.MyGridView
         android:id="@+id/photo_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +20,6 @@
         android:horizontalSpacing="5dp"
         android:numColumns="3"
         >
-    </com.zjianhao.view.MyGridView>
+    </com.SmartAlbumWithCloud.view.MyGridView>
 
 </LinearLayout>

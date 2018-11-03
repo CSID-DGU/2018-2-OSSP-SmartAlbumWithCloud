@@ -21,6 +21,9 @@ android {
 }
 
 dependencies {
+    // google login dependencies
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:23.2.0'

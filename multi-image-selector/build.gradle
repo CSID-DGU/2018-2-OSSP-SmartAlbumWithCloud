@@ -21,6 +21,8 @@ android {
 }
 
 dependencies {
+    // for Google Login dependencies
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:23.2.0'
     implementation 'com.squareup.picasso:picasso:2.4.0'

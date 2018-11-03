@@ -16,7 +16,7 @@
         />
 
 
-    <com.zjianhao.view.CircleImageView
+    <com.SmartAlbumWithCloud.view.CircleImageView
         android:id="@+id/head_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
