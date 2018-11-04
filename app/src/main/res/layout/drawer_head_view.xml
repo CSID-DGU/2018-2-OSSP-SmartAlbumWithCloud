@@ -16,15 +16,16 @@
         />
 
 
-    <com.SmartAlbumWithCloud.view.CircleImageView
+    <com.zjianhao.view.CircleImageView
         android:id="@+id/head_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_below="@+id/log_out"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-18dp"
         android:src="@drawable/head_icon"
         app:border_color="@color/colorAccent"
-        app:border_width="1dp"
-        android:layout_centerInParent="true"
-        />
+        app:border_width="1dp" />
 
     <TextView
         android:id="@+id/head_username"
@@ -37,4 +38,11 @@
         android:textColor="@color/white"
         android:textSize="15sp" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/head_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 </RelativeLayout>

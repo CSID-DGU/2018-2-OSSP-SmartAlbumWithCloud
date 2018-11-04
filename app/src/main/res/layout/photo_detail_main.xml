@@ -5,7 +5,7 @@
     android:background="@color/black"
     >
 
-        <com.SmartAlbumWithCloud.view.TouchImageView
+        <com.zjianhao.view.TouchImageView
             android:id="@+id/photo_detail_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
