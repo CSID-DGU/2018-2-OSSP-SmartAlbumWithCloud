@@ -211,10 +211,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void callPermission(){
         if (Build.VERSION.SDK_INT >= 23) {
             int checkCallStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            int checkCallCameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
             if(checkCallStoragePermission != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0x01);
             }
-
+            if(checkCallCameraPermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},0x01);
+            }
         }
 
     }
