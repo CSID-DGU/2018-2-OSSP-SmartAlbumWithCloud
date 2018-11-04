@@ -240,9 +240,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @OnClick(R.id.take_photo_fb)
     public void onClick() {
-        takePicture();
+       // takePicture();
+        Intent intent = new Intent(getApplicationContext(),AlbumMapActivity.class);
+        startActivity(intent);
 
-    }
+    }//take_photo 버튼을 그대로 가져다가 구글맵 액티비티 연결로 씀. 이후 사진이랑 이름 바꾸면댈듯?
 
 
 
