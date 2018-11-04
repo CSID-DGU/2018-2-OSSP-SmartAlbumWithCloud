@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.SmartAlbumWithCloud">
+    package="com.zjianhao">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,10 +13,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.SmartAlbumWithCloud.album.AppContext"
+        android:name="com.zjianhao.album.AppContext"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.SmartAlbumWithCloud.album.MainActivity"
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="com.zjianhao" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <activity android:name="com.zjianhao.album.MainActivity"
             android:windowSoftInputMode="adjustResize"
             >
             <intent-filter>
@@ -26,24 +30,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.SmartAlbumWithCloud.ui.AlbumDetailAty"/>
-        <activity android:name="com.SmartAlbumWithCloud.ui.PhotoDetailAty"
+        <activity android:name="com.zjianhao.ui.AlbumDetailAty"/>
+        <activity android:name="com.zjianhao.ui.PhotoDetailAty"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <activity android:name="com.SmartAlbumWithCloud.ui.AdvancedSearchAty"
+        <activity android:name="com.zjianhao.ui.AdvancedSearchAty"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.SmartAlbumWithCloud.ui.AmbigiousSearchAty"/>
+        <activity android:name="com.zjianhao.ui.AmbigiousSearchAty"/>
 
-        <activity android:name="com.SmartAlbumWithCloud.ui.PhotoInfoAty"/>
+        <activity android:name="com.zjianhao.ui.PhotoInfoAty"/>
 
-        <activity android:name="com.SmartAlbumWithCloud.ui.RegistAty"
+        <activity android:name="com.zjianhao.ui.RegistAty"
             android:windowSoftInputMode="adjustResize"
             />
-        <activity android:name="com.SmartAlbumWithCloud.ui.LoginAty"/>
+        <activity android:name="com.zjianhao.ui.LoginAty"/>
 
         <activity
             android:configChanges="orientation|screenSize"
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
-        <service android:name="com.SmartAlbumWithCloud.service.UploadService"/>
+        <service android:name="com.zjianhao.service.UploadService"/>
     </application>
 
 </manifest>
