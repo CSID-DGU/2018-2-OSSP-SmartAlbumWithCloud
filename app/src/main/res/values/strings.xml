@@ -52,4 +52,7 @@
         <string name="cloud">Cloud </string>
         <string name="click_to_login">Unable to view cloud photos without login, click login </string>
         <string name="share_information"> Come and use the quick check album, easily manage the album, and cloud backup </string>
+
+        <string name="title_activity_album_map">Map</string>
+
 </resources>

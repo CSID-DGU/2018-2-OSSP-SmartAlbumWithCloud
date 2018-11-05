@@ -267,7 +267,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @OnClick(R.id.take_photo_fb)
     public void onClick() {
-        takePicture();
+        Intent intent = new Intent(getApplicationContext(),AlbumMapActivity.class);
+        startActivity(intent);
 
     }
 
