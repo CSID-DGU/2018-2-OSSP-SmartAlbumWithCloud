@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/2018-2-OSSP-SmartAlbumWithCloud.iml" filepath="$PROJECT_DIR$/2018-2-OSSP-SmartAlbumWithCloud.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/2018-2-OSSP-SmartAlbumWithCloud.iml" filepath="$PROJECT_DIR$/2018-2-OSSP-SmartAlbumWithCloud.iml" />
+>>>>>>> 5170c15fd7df1058362484410a566c2a25d960df
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/multi-image-selector/multi-image-selector.iml" filepath="$PROJECT_DIR$/multi-image-selector/multi-image-selector.iml" />
     </modules>
