@@ -114,17 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /** Initial Title combine (only one time) */
-        titles.add(getString(R.string.photo));
-        titles.add(getString(R.string.album));
-        titles.add(getString(R.string.cloud));
 
-        init(); // Start Main Page
-        callPermission();
-    }
-
-
-    public void init() {
         ButterKnife.inject(this);
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -138,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             }
         });
 
-
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mainToolbar, R.string.open, R.string.close);
         mActionBarDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_menu_white_36dp);
         mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -147,13 +136,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
-        photoFragment = new PhotoFragment();
-        fragments.add(photoFragment);
-        albumFragment = new AlbumFragment();
-        fragments.add(albumFragment);
-        cloudFragment = new CloudFragment();
-        fragments.add(cloudFragment);
+        init();
+        callPermission();
 
+        adapter = new MainTabAdapter(getSupportFragmentManager(), fragments, titles);
+        viewpager.setAdapter(adapter);
+        mainTabLayout.setupWithViewPager(viewpager);
+        mainTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         View view = navigationView.inflateHeaderView(R.layout.drawer_head_view);
         navigationView.inflateMenu(R.menu.drawable_home_main);
@@ -169,6 +158,20 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 signIn();
             }
         });
+
+        /** Logout Button Settings - Ju Hun Choi */
+        logOutIv = (ImageView)view.findViewById(R.id.log_out);
+        logOutIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+                updateUI();
+                ToastUtil.show(MainActivity.this,"Logged Out");
+
+            }
+        });
+        /****** End of Google Login *****/
+
         headUsername = (TextView)view.findViewById(R.id.head_username);
         imgProfilePic = (ImageView)view.findViewById(R.id.head_img);
         if(mGoogleSignInAccount == null){ // Not Logged In yet
@@ -186,25 +189,22 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imgProfilePic);
         }
+    }
 
 
-        adapter = new MainTabAdapter(getSupportFragmentManager(), fragments, titles);
-        viewpager.setAdapter(adapter);
-        mainTabLayout.setupWithViewPager(viewpager);
-        mainTabLayout.setTabMode(TabLayout.MODE_FIXED);
+    public void init() {
+        /** Initial Title combine (only one time) */
+        titles.add(getString(R.string.photo));
+        titles.add(getString(R.string.album));
+        titles.add(getString(R.string.cloud));
+        photoFragment = new PhotoFragment();
+        fragments.add(photoFragment);
+        albumFragment = new AlbumFragment();
+        fragments.add(albumFragment);
+        cloudFragment = new CloudFragment();
+        fragments.add(cloudFragment);
 
-        /** Logout Button Settings - Ju Hun Choi */
-        logOutIv = (ImageView)view.findViewById(R.id.log_out);
-        logOutIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-                updateUI();
-                ToastUtil.show(MainActivity.this,"Logged Out");
 
-            }
-        });
-        /****** End of Google Login *****/
     }
 
     // Ask for Permission if not granted
@@ -256,12 +256,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.search_menu:
                 Intent intent = new Intent(this, AmbigiousSearchAty.class);
                 startActivity(intent);
-
                 break;
             case R.id.share_menu:
                share();
                 break;
-
         }
 
 
@@ -270,9 +268,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @OnClick(R.id.take_photo_fb)
     public void onClick() {
-       // takePicture();
-        Intent intent = new Intent(getApplicationContext(),AlbumMapActivity.class);
-        startActivity(intent);
+        takePicture();
+
 
     }//take_photo 버튼을 그대로 가져다가 구글맵 액티비티 연결로 씀. 이후 사진이랑 이름 바꾸면댈듯?
 
@@ -378,6 +375,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
             case R.id.nav_upload_photo:
                 AppContext application = (AppContext) getApplication();
+                if(mGoogleSignInClient != null){
+                    /*
+
+
+                    Google Sync 기능 넣기
+                     */
+                }
+                /*
                 User user = application.getUser();
                 if (user != null && user.getUsername()!= null){
                     intent = new Intent(this, MultiImageSelectorActivity.class);
@@ -387,11 +392,19 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                     intent.putStringArrayListExtra(MultiImageSelectorActivity.EXTRA_DEFAULT_SELECTED_LIST, selectPath);
                     startActivityForResult(intent, 0x02);
                 }
+                */
 
                 else {
                     ToastUtil.show(this,"Please login first");
-                    Intent intent1 = new Intent(this,LoginAty.class);
-                    startActivity(intent1);
+                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestEmail()
+                            .build();
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+                    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                    startActivityForResult(signInIntent, RC_SIGN_IN);
+                    //Intent intent1 = new Intent(this,.class);
+                    //startActivity(intent1);
                 }
 
 
@@ -427,19 +440,36 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     /** Google Sign In Actions - by Ju Hun Choi **/
     private void signIn(){
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        try {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }catch(Exception e){
+            e.printStackTrace();
+            Log.e("SignIn", "MainActivity-signin : Google Sign In Failed!!");
+            return;
+        }
+        //goto handleSignInResult();
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             mGoogleSignInAccount = completedTask.getResult(ApiException.class);
             Log.w("GoogleLogIn", "signInResult:GoogleLoginSuccess");
+            headUsername.setText(mGoogleSignInAccount.getEmail());
+            googleLoginView.setVisibility(View.INVISIBLE);
+            headUsername.setVisibility(View.VISIBLE);
+            /** Google Profile Image Settings - Ju Hun Choi*/
+            String personPhotoUrl = mGoogleSignInAccount.getPhotoUrl().toString();
+            Glide.with(getApplicationContext()).load(personPhotoUrl)
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgProfilePic);
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -453,6 +483,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     // [START signOut]
     private void signOut() {
         mGoogleSignInAccount = null;
+        googleLoginView.setVisibility(View.VISIBLE);
+        headUsername.setVisibility(View.INVISIBLE);
+        Glide.with(getApplicationContext()).load(R.drawable.head_icon)
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imgProfilePic);
         updateUI();
 /*
          mGoogleSignInClient.signOut()
@@ -468,13 +505,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
     // [END signOut]
     public void updateUI(){
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
-        init();
-        //Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra("GoogleSignInAccount", mGoogleSignInAccount);
-        //startService(intent);
-        //finish();
+        //init();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("GoogleSignInAccount", mGoogleSignInAccount);
+        startService(intent);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

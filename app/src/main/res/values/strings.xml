@@ -1,11 +1,6 @@
 <resources>
-<<<<<<< HEAD
-        <string name="app_name">Smart Album with Cloud </string>
-=======
-        
-    <string name="app_name">quick check album </string>
->>>>>>> origin/JeonghwanLee
 
+        <string name="app_name">Smart Album with Cloud </string>
         <!--Login Module-->
         
     <string name="login_username">e-mail/phone number </string>

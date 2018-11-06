@@ -160,8 +160,6 @@ public class PhotoPresenter {
         }
         return photos;
     }
-
-
     public String getKeywords(String keywords){
         String[] split = keywords.split("\\s+");
         StringBuilder builder = new StringBuilder();
@@ -171,8 +169,4 @@ public class PhotoPresenter {
         }
         return builder.toString();
     }
-
-
-
-
 }
