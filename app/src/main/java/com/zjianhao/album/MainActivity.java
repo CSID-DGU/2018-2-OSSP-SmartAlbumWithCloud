@@ -182,12 +182,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             googleLoginView.setVisibility(View.INVISIBLE);
             headUsername.setVisibility(View.VISIBLE);
             /** Google Profile Image Settings - Ju Hun Choi*/
-            String personPhotoUrl = mGoogleSignInAccount.getPhotoUrl().toString();
-            Glide.with(getApplicationContext()).load(personPhotoUrl)
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgProfilePic);
+            Uri myuri = mGoogleSignInAccount.getPhotoUrl();
+            if (myuri != null) {
+                String personPhotoUrl = myuri.toString();
+                Glide.with(getApplicationContext()).load(personPhotoUrl)
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfilePic);
+
+            }
         }
     }
 
@@ -212,14 +216,17 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         if (Build.VERSION.SDK_INT >= 23) {
             int checkCallStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             int checkCallCameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+            int checkCallLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
             if(checkCallStoragePermission != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0x01);
             }
             if(checkCallCameraPermission != PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},0x01);
             }
+            if(checkCallLocationPermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},0x01);
+            }
         }
-
     }
 
     @Override
@@ -238,6 +245,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 if (grantResults[0] == PackageManager.PERMISSION_DENIED)
                     Toast.makeText(this,"Failed to take photo permission, photos cannot be taken.",Toast.LENGTH_SHORT).show();
 
+                break;
+            case 0x03:
+                if(grantResults[0] == PackageManager.PERMISSION_DENIED)
+                    Toast.makeText(this, "Failed to get Location permission, Map view cannot be used.",Toast.LENGTH_SHORT).show();
+                resultCoarsePermission = ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION);
+                if(resultCoarsePermission != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0x03);
                 break;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -268,9 +282,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     @OnClick(R.id.take_photo_fb)
     public void onClick() {
-        takePicture();
-
-
+        //takePicture();
+        Intent intent = new Intent(getApplicationContext(),AlbumMapActivity.class);
+        startActivity(intent);
     }//take_photo 버튼을 그대로 가져다가 구글맵 액티비티 연결로 씀. 이후 사진이랑 이름 바꾸면댈듯?
 
     public void takePicture(){
@@ -381,20 +395,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
                     Google Sync 기능 넣기
                      */
-                }
-                /*
-                User user = application.getUser();
-                if (user != null && user.getUsername()!= null){
-                    intent = new Intent(this, MultiImageSelectorActivity.class);
-                    intent.putExtra(MultiImageSelectorActivity.EXTRA_SHOW_CAMERA, true);
-                    intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, 100);
-                    intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_MODE, MultiImageSelectorActivity.MODE_MULTI);
-                    intent.putStringArrayListExtra(MultiImageSelectorActivity.EXTRA_DEFAULT_SELECTED_LIST, selectPath);
-                    startActivityForResult(intent, 0x02);
-                }
-                */
-
-                else {
+                }else {
                     ToastUtil.show(this,"Please login first");
                     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                             .requestEmail()
@@ -464,12 +465,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             googleLoginView.setVisibility(View.INVISIBLE);
             headUsername.setVisibility(View.VISIBLE);
             /** Google Profile Image Settings - Ju Hun Choi*/
-            String personPhotoUrl = mGoogleSignInAccount.getPhotoUrl().toString();
-            Glide.with(getApplicationContext()).load(personPhotoUrl)
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgProfilePic);
+            Uri myuri = mGoogleSignInAccount.getPhotoUrl();
+            if (myuri != null) {
+                String personPhotoUrl = myuri.toString();
+                Glide.with(getApplicationContext()).load(personPhotoUrl)
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfilePic);
+
+            }
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -491,23 +496,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgProfilePic);
         updateUI();
-/*
-         mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
-
-                        // [END_EXCLUDE]
-                    }
-                    });
-*/
     }
     // [END signOut]
     public void updateUI(){
-        //setContentView(R.layout.activity_main);
-
-        //init();
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("GoogleSignInAccount", mGoogleSignInAccount);
         startService(intent);

@@ -24,6 +24,7 @@ dependencies {
     // google login dependencies
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation  'com.github.bumptech.glide:glide:3.7.0' // for Google Profile Image
+    implementation 'com.google.android.gms:play-services-maps:16.0.0' // for Google Map
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     testImplementation 'junit:junit:4.12'

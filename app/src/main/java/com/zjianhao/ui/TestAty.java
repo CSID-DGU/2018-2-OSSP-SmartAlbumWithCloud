@@ -92,7 +92,7 @@ public class TestAty extends AppCompatActivity {
 
         OkHttpClient client = new OkHttpClient();
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        builder.addFormDataPart("userId", "123");
+        builder.addFormDataPart("userId", "icon.png");
 
 
         builder.addFormDataPart("photos","aa.jpg", RequestBody.create(MediaType.parse("application/octet-stream"),new File("/storage/emulated/0/DCIM/Camera/IMG20160528204240.jpg")));
