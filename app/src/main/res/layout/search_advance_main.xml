@@ -16,7 +16,7 @@
         android:gravity="center"
         >
     <RelativeLayout
-        android:id="@+id/photo_name_rl"
+        android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -61,7 +61,7 @@
         android:id="@+id/photo_date_rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/photo_name_rl"
+        android:layout_below="@+id/RelativeLayout2"
         android:layout_marginTop="30dp">
 
         <android.support.design.widget.TextInputLayout

@@ -31,7 +31,10 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -420,6 +423,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.nav_take_picture:
                 takePicture();
                 break;
+            case R.id.nav_setting:   // 셋팅 메뉴 추가 - 박상혁
+                intent = new Intent(this, settingActivity.class);
+                startActivity(intent);
         }
 
         return false;
