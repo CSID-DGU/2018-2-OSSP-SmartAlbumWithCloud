@@ -69,6 +69,11 @@ import butterknife.OnClick;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener{
 
     @InjectView(R.id.main_toolbar)
@@ -421,6 +426,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.nav_take_picture:
                 takePicture();
                 break;
+            case R.id.nav_setting:   // 셋팅 메뉴 추가 - 박상혁
+                intent = new Intent(this, settingActivity.class);
+                startActivity(intent);
+
         }
 
         return false;

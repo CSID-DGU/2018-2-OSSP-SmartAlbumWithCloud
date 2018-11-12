@@ -23,7 +23,10 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_share_white_24dp"
             android:title="@string/share" />
-
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting_white"
+            android:title="Setting" />
+        /* 셋팅 아이콘, 버튼 추가 - 박상혁 */
     </group>
-
 </menu>
