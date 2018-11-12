@@ -1,5 +1,7 @@
 package com.zjianhao.utils;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +20,13 @@ public class TimeUtil {
 
     public static String parseLongToString(long millions){
         Date date = new Date(millions);
-        SimpleDateFormat format = new SimpleDateFormat("yyyyyearMMmonthddday HH:mm");
+        SimpleDateFormat format;
+        try {
+            format = new SimpleDateFormat("yyyyyearMMmonthddday HH:mm");
+        }catch(Exception e){
+            e.printStackTrace();
+            return date.toString();
+        }
         return format.format(date);
     }
 

@@ -40,6 +40,7 @@
         <activity android:name="com.zjianhao.ui.AdvancedSearchAty"/>
         <activity android:name="com.zjianhao.ui.AmbigiousSearchAty"/>
         <activity android:name="com.zjianhao.ui.AlbumDetailAty"/>
+        <activity android:name="com.zjianhao.ui.PhotoInfoAty"/>
         <activity android:name="com.zjianhao.ui.PhotoDetailAty"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
@@ -61,6 +62,7 @@
             android:value="@string/google_maps_key" />
         <activity android:name=".album.settingActivity"></activity>
         <service android:name="com.zjianhao.service.UploadService"/>
+
 </application>
 
 </manifest>

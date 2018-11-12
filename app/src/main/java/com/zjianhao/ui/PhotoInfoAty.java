@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -108,7 +109,7 @@ public class PhotoInfoAty extends AppCompatActivity {
         long len = file.length();
         String size;
         if (len>1)
-        size = getFileSize(len);
+            size = getFileSize(len);
         else size="Unknown";
         infoSize.setText(size);
         infoFilepathTv.setText(photo.getImgUrl());
@@ -116,7 +117,7 @@ public class PhotoInfoAty extends AppCompatActivity {
         if (photo.getLocation() != null)
             infoLocationTv.setText(photo.getLocation());
         else if (photo.getLatitude()>1){
-           getAddress(photo.getLatitude(),photo.getLongitude());
+            getAddress(photo.getLatitude(),photo.getLongitude());
         }
     }
 
