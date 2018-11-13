@@ -38,4 +38,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.3.1'
     implementation project(path: ':multi-image-selector')
     annotationProcessor 'com.jakewharton:butterknife:5.1.1'
+    implementation 'com.github.guardian:Option:-SNAPSHOT'
 }

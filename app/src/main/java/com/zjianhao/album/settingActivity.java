@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zjianhao.R;
+import com.zjianhao.local.DirectoryChooserActivity;
+import com.zjianhao.local.DirectoryChooserConfig;
 import com.zjianhao.holder.SettingHolder;
 
 import static com.zjianhao.holder.SettingHolder.SETTING_TIME;
@@ -106,6 +108,19 @@ public class settingActivity extends Activity {
     }
 
     public void click_local_directory_setting(View view){
+        Intent intent = new Intent(getApplicationContext(),com.zjianhao.local.DirectoryChooserActivity.class);
+
+        final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                .newDirectoryName("DirChooserSample")
+                .allowReadOnlyDirectory(true)
+                .allowNewDirectoryNameModification(true)
+                .build();
+
+        intent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+
+        startActivity(intent);
+    }
+    public void click_cloud_directory_setting(View view){
 
     }
 }

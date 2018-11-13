@@ -17,7 +17,10 @@
     <color name="dark_blue">#ff4a90e2</color>
 
 
+    <color name="bright_blue">#33B5E5</color>
 
+    <!-- Use Gingerbread-orange -->
+    <color name="selection_background_color">#FEBB20</color>
 
 
 
