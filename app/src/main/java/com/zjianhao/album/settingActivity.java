@@ -1,27 +1,33 @@
 package com.zjianhao.album;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zjianhao.R;
+import com.zjianhao.holder.SettingHolder;
+
+import static com.zjianhao.holder.SettingHolder.SETTING_TIME;
+import static com.zjianhao.holder.SettingHolder.SUB_SETTING_DAY;
+import static com.zjianhao.holder.SettingHolder.SUB_SETTING_MONTH;
+import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 
 public class settingActivity extends Activity {
+    private SettingHolder mySetting;
     private Spinner s;
-    private String Cloud_directory;
-    private String Local_directory;
-    private int sort_type = 0;
-    private int sort_time_type = 0;
-    private String numStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        mySetting = new SettingHolder();
 
         final TextView tv = (TextView)findViewById(R.id.textView4); // 값들어오는지 확인용
 
@@ -32,16 +38,17 @@ public class settingActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
-                        sort_time_type = 0;
+                    case SUB_SETTING_YEAR: // Year
+                        mySetting.setSort_time_type(SUB_SETTING_YEAR);
                         break;
-                    case 1:
-                        sort_time_type = 1;
+                    case SettingHolder.SUB_SETTING_MONTH: // Month
+                        mySetting.setSort_time_type(SUB_SETTING_MONTH);
                         break;
-                    case 2:
-                        sort_time_type = 2;
+                    case SettingHolder.SUB_SETTING_DAY: // Day
+                        mySetting.setSort_time_type(SUB_SETTING_DAY);
                         break;
                     default:
+                        Log.d("Unexpected Error", "settingActivity SUB_SETTING error");
                         break;
                 }
                 //tv.setText(""+ parent.getItemAtPosition(position)); //선택한 내용이 잘들어오는지 확인용
@@ -58,27 +65,47 @@ public class settingActivity extends Activity {
 /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
         EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
-        Cloud_directory = editText.getText().toString();  // 받아온 값을 string변수에 저장
+        if(mySetting.setCloud_directory(editText.getText().toString())) {  // 받아온 값을 string변수에 저장
+            Log.d("Cloud Directory Set : ", mySetting.getCloud_directory());
+        }else{
+            Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         editText = (EditText) findViewById(R.id.local_Directory);
-        Local_directory = editText.getText().toString();
+        if(mySetting.setLocal_directory(editText.getText().toString())){
+            Log.d("Local Directory : ", mySetting.getLocal_directory());
+        }else{
+            Toast.makeText(getApplicationContext(),"Check Your Local Directory",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        this.getIntent().putExtra("Cloud_directory", Cloud_directory);
-        this.getIntent().putExtra("Local_directory", Local_directory);
-        finish();
+        if(mySetting.getSort_type() == 0){
+            Toast.makeText(getApplicationContext(),"Check Your Sort Option",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(mySetting.getSort_type()==SETTING_TIME && mySetting.getSort_time_type() == 0){
+            Toast.makeText(getApplicationContext(),"Check Your Time SubSort Option",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(getApplicationContext(), "Setting Saved",Toast.LENGTH_SHORT).show();
+        finish(); // Return to Previous Page
     }
 
     public void click_radioButton_time(View view) {
-        sort_type = 1;
+        mySetting.setSort_type(SettingHolder.SETTING_TIME);
         s.setEnabled(true);
 //        numStr = String.valueOf(sort_type);    // 값이 잘 들어오는지 확인용 Toast
 //        Toast.makeText(this, numStr, Toast.LENGTH_SHORT).show();
     }
 
     public void click_radioButton_location(View view) {
-        sort_type = 2;
+        mySetting.setSort_type(SettingHolder.SETTING_LOCATION);
         s.setEnabled(false);
 //        numStr = String.valueOf(sort_type);    // 값이 잘 들어오는지 확인용 Toast
 //        Toast.makeText(this, numStr, Toast.LENGTH_SHORT).show();
+    }
+
+    public void click_local_directory_setting(View view){
+
     }
 }
