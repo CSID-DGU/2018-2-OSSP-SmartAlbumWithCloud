@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     /** Google Sign In **/
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient = null;
-    private static GoogleSignInAccount mGoogleSignInAccount= null;
+    public static GoogleSignInAccount mGoogleSignInAccount= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

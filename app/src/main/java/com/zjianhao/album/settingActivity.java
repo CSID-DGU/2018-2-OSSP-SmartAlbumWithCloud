@@ -11,6 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveResourceClient;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.tasks.Task;
 import com.zjianhao.R;
 import com.zjianhao.local.DirectoryChooserActivity;
 import com.zjianhao.local.DirectoryChooserConfig;
@@ -121,6 +127,7 @@ public class settingActivity extends Activity {
         startActivity(intent);
     }
     public void click_cloud_directory_setting(View view){
-
+        Intent intent = new Intent(getApplicationContext(),QueryFilesInFolderActivity.class);
+        startActivity(intent);
     }
 }
