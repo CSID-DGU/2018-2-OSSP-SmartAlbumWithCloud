@@ -14,23 +14,22 @@
 package com.zjianhao.album;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveFolder;
-import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.query.Filters;
 import com.google.android.gms.drive.query.Query;
 import com.google.android.gms.drive.query.SearchableField;
 import com.google.android.gms.drive.widget.DataBufferAdapter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.zjianhao.R;
+
 
 /**
  * An activity that illustrates how to query files in a folder.
@@ -53,7 +52,10 @@ public class QueryFilesInFolderActivity extends BaseDemoActivity  {
     protected void onDriveClientReady() {
         pickFolder()
                 .addOnSuccessListener(this,
-                        driveId -> listFilesInFolder(driveId.asDriveFolder()))
+                        driveId -> {
+                            listFilesInFolder(driveId.asDriveFolder());
+                            finish(); // Return to Previous Activity - JuhunChoi
+                        })
                 .addOnFailureListener(this, e -> {
                     Log.e(TAG, "No folder selected", e);
                     showMessage(getString(R.string.folder_not_selected));
@@ -76,6 +78,7 @@ public class QueryFilesInFolderActivity extends BaseDemoActivity  {
      * it retrieves results for the first page.
      */
     private void listFilesInFolder(DriveFolder folder) {
+        Log.d("Show",folder.toString());
         Query query = new Query.Builder()
                 .addFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
                 .build();
@@ -89,5 +92,6 @@ public class QueryFilesInFolderActivity extends BaseDemoActivity  {
                     Log.e(TAG, "Error retrieving files", e);
                     finish();
                 });
+
     }
 }

@@ -7,16 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.SignInAccount;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveResourceClient;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.drive.DriveId;
 import com.zjianhao.R;
 import com.zjianhao.local.DirectoryChooserActivity;
 import com.zjianhao.local.DirectoryChooserConfig;
@@ -30,6 +26,7 @@ import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 public class settingActivity extends Activity {
     private SettingHolder mySetting;
     private Spinner s;
+    public static DriveId myDriveId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +69,15 @@ public class settingActivity extends Activity {
 
 /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
-        EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
-        if(mySetting.setCloud_directory(editText.getText().toString())) {  // 받아온 값을 string변수에 저장
-            Log.d("Cloud Directory Set : ", mySetting.getCloud_directory());
+        EditText editText;// = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
+
+        if(myDriveId != null) {
+            Log.d("Cloud Directory Set : ", myDriveId.toString());
         }else{
             Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         editText = (EditText) findViewById(R.id.local_Directory);
         if(mySetting.setLocal_directory(editText.getText().toString())){
