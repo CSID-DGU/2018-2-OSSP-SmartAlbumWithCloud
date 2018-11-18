@@ -1,6 +1,7 @@
 <resources>
 
-        <string name="app_name">Smart Album with Cloud </string>
+        
+    <string name="app_name">Smart Album with Cloud </string>
         <!--Login Module-->
         
     <string name="login_username">e-mail/phone number </string>
@@ -116,6 +117,8 @@
     <string name="select_folder">Select a folder</string>
     <string name="select_file">Select file</string>
     <string name="folder_not_selected">No folder selected, can not continue.</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>

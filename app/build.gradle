@@ -29,7 +29,7 @@ android {
 dependencies {
     // google login dependencies
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-    implementation  'com.github.bumptech.glide:glide:3.7.0' // for Google Profile Image
+    implementation 'com.github.bumptech.glide:glide:3.7.0' // for Google Profile Image
     implementation 'com.google.android.gms:play-services-maps:16.0.0' // for Google Map
     implementation 'com.google.android.gms:play-services-drive:16.0.0' // for Google Drive
     implementation 'com.android.support.constraint:constraint-layout:1.1.3' // for Setting Page

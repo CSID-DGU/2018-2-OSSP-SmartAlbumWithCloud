@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zjianhao">
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/><!--18.11.18 두 줄 추가  by ljh(geocoding) 내위치정보 얻기 위함-->
+    <uses-permission android:name="android.permission.INTERNET"/> <!--18.11.18 두 줄 추가 by ljh(geocoding)구글 서버 접근 위함-->
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <permission
         android:name="com.example.googlemaptest.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
     <application
-        android:name="com.zjianhao.album.AppContext"
+        android:name=".album.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"
-            />
-        <activity android:name="com.zjianhao.album.MainActivity"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".album.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,18 +40,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.zjianhao.ui.AdvancedSearchAty"/>
-        <activity android:name="com.zjianhao.ui.AmbigiousSearchAty"/>
-        <activity android:name="com.zjianhao.ui.AlbumDetailAty"/>
-        <activity android:name="com.zjianhao.ui.PhotoInfoAty"/>
-        <activity android:name="com.zjianhao.ui.PhotoDetailAty"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".ui.AdvancedSearchAty" />
+        <activity android:name=".ui.AmbigiousSearchAty" />
+        <activity android:name=".ui.AlbumDetailAty" />
+        <activity android:name=".ui.PhotoInfoAty" />
         <activity
-            android:configChanges="orientation|screenSize"
-            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+            android:name=".ui.PhotoDetailAty"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
-            android:name="com.zjianhao.album.AlbumMapActivity"
-            android:label="@string/title_activity_album_map"></activity>
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".album.AlbumMapActivity"
+            android:label="@string/title_activity_album_map" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,15 +64,20 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".album.settingActivity"/>
-        <activity android:name="com.zjianhao.local.DirectoryChooserActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name="com.zjianhao.album.QueryFilesInFolderActivity"/>
 
+        <activity android:name=".album.settingActivity" />
+        <activity
+            android:name=".local.DirectoryChooserActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".album.QueryFilesInFolderActivity" />
 
-        <service android:name="com.zjianhao.service.UploadService"/>
+        <service android:name=".service.UploadService" />
 
-
-</application>
+        <activity
+            android:name=".mapdata.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".mapdata.ljhtestActivity"></activity>
+    </application>
 
 </manifest>
