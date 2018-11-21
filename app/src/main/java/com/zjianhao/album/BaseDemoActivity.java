@@ -61,12 +61,12 @@ public abstract class BaseDemoActivity extends Activity {
     /**
      * Handles high-level drive functions like sync
      */
-    private DriveClient mDriveClient;
+    public static DriveClient mDriveClient;
 
     /**
      * Handle access to Drive resources/files.
      */
-    private DriveResourceClient mDriveResourceClient;
+    public static DriveResourceClient mDriveResourceClient;
 
     /**
      * Tracks completion of the drive picker

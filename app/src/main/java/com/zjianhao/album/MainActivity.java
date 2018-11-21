@@ -39,6 +39,7 @@ import com.zjianhao.bean.User;
 import com.zjianhao.fragments.AlbumFragment;
 import com.zjianhao.fragments.CloudFragment;
 import com.zjianhao.fragments.PhotoFragment;
+import com.zjianhao.holder.SettingHolder;
 import com.zjianhao.service.UploadService;
 import com.zjianhao.ui.AdvancedSearchAty;
 import com.zjianhao.ui.AmbigiousSearchAty;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private static boolean title_bool =false;
     /** Google Sign In **/
     private static final int RC_SIGN_IN = 9001;
-    private GoogleSignInClient mGoogleSignInClient = null;
+    public static GoogleSignInClient mGoogleSignInClient = null;
     public static GoogleSignInAccount mGoogleSignInAccount= null;
 
     @Override

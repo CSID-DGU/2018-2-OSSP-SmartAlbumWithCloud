@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +17,15 @@ import com.zjianhao.local.DirectoryChooserActivity;
 import com.zjianhao.local.DirectoryChooserConfig;
 import com.zjianhao.holder.SettingHolder;
 
+import java.io.File;
+
 import static com.zjianhao.holder.SettingHolder.SETTING_TIME;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_DAY;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_MONTH;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 
 public class settingActivity extends Activity {
-    private SettingHolder mySetting;
+    public static SettingHolder mySetting;
     private Spinner s;
     public static DriveId myDriveId = null;
 
@@ -73,6 +74,8 @@ public class settingActivity extends Activity {
 
         if(myDriveId != null) {
             Log.d("Cloud Directory Set : ", myDriveId.toString());
+            Intent serviceIntent = new Intent(this,FileUploaderService.class);
+            startService(serviceIntent);
         }else{
             Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
             return;

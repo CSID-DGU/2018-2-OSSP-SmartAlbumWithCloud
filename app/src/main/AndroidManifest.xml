@@ -64,8 +64,9 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name="com.zjianhao.album.QueryFilesInFolderActivity"/>
 
+        <service android:name="com.zjianhao.service.UploadService"></service>
+        <service android:name="com.zjianhao.album.FileUploaderService"></service>
 
-        <service android:name="com.zjianhao.service.UploadService"/>
 
 
 </application>
