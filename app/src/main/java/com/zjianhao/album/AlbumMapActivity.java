@@ -9,8 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.zjianhao.R;
-import com.zjianhao.mapdata.TestActivity;
-import com.zjianhao.mapdata.ljhtestActivity;
+import com.zjianhao.LJHdata.ljhtestActivity;
 
 import android.view.View;
 

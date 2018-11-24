@@ -1,6 +1,16 @@
-package com.zjianhao.mapdata;
+package com.zjianhao.LJHdata;
 
-import com.zjianhao.bean.Photo;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.TextView;
+
+import com.zjianhao.R;
 import com.zjianhao.utils.LogUtil;
 
 import org.json.JSONArray;
@@ -13,28 +23,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Log;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MapData extends Activity
-{
+public class TestActivity extends AppCompatActivity {
     private Map<String,List<String>> photoListByLoc = new HashMap<>();
     List<String> locs = new ArrayList<>();
-    List<String> AllPathes = new ArrayList<>();
+    List<String> allPathes = new ArrayList<>();
+    String testStr;
     private static final String TAG = "TEST1";
     static String city;
 
-public String getCity(double latitude, double longitude)
+    public String getCity(double latitude, double longitude)
     {
 
         LogUtil.isDebug(true);
@@ -75,8 +78,8 @@ public String getCity(double latitude, double longitude)
 
     public void getLocationsFromAlbum()
     {
-    Uri uri  = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-    Cursor cursor = getContentResolver().query(uri, new String[] { android.provider.MediaStore.Images.ImageColumns.DATA }, null, null, null);
+        Uri uri  = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        Cursor cursor = getContentResolver().query(uri, new String[] { android.provider.MediaStore.Images.ImageColumns.DATA }, null, null, null);
     }
 
     private ArrayList<String> getPathOfAllImages()
@@ -107,4 +110,24 @@ public String getCity(double latitude, double longitude)
         }
         return result;
     }
+
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        allPathes=getPathOfAllImages();
+        int i = 0;
+        for(String str : allPathes)
+        {
+            testStr+=str;
+        }
+        TextView textView1 = (TextView) findViewById(R.id.textview);
+        textView1.setText(testStr);
+    }
+
 }
