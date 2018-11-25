@@ -1,11 +1,10 @@
-package com.zjianhao.LJHdata;
+package com.zjianhao.album;
 
 import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zjianhao.R;
 
@@ -36,12 +34,10 @@ import java.util.Set;
 
 public class ljhtestActivity extends AppCompatActivity {
 
-    static String city = "default";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ljhtest);
-        String teststr = "";
         ArrayList<String> testArrList = new ArrayList<>();
         ArrayList<String> titleArray = new ArrayList<>();
         testArrList = getPathOfAllImages();
@@ -57,11 +53,23 @@ public class ljhtestActivity extends AppCompatActivity {
         ArrayList<PhotoDatabase> dbs = new ArrayList<>();
         dbs = getDatabase();
 
+        String _test = "";
         for(PhotoDatabase pdb : dbs)
         {
+            if(pdb.location==null)
+            {
+                pdb.location="NoSuchLocation";
+            }
+            if(pdb.date==null)
+            {
+                pdb.date="NoSuchDate";
+            }
             locations.add(pdb.location);
             dates.add(pdb.date);
         }
+
+
+
 
         for(String loc : locations)
         {
@@ -101,10 +109,10 @@ public class ljhtestActivity extends AppCompatActivity {
             tttest+="\n";
         }//테스트용 코드*/
         DirFileManager dfm = new DirFileManager();
-       //dfm.copyFileByMap("/DCIM/장소분류테스트",locations,photoListByLoc);//정상구동확인 BY LJH 18.11.24
-        dfm.copyFileByMap("/DCIM/날짜별분류테스트",dates,photoListByDate);
+       dfm.copyFileByMap("/DCIM/장소분류테스트",locations,photoListByLoc);//정상구동확인 BY LJH 18.11.24
+       dfm.copyFileByMap("/DCIM/날짜별분류테스트",dates,photoListByDate);
         TextView tv = new TextView(this);
-        tv.setText(tttest);
+        tv.setText(_test);
         ScrollView sv = new ScrollView(this);
         sv.addView(tv);
         setContentView(sv);

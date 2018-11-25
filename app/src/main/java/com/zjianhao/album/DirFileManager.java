@@ -1,4 +1,4 @@
-package com.zjianhao.LJHdata;
+package com.zjianhao.album;
 
 import android.os.Environment;
 
