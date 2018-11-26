@@ -121,4 +121,5 @@
     <dimen name="personal_item_margin_leftright">12dip</dimen>
     <dimen name="personal_item_textsize">15sp</dimen>
     <dimen name="personal_item_height">45dip</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -32,11 +32,11 @@ public class FileUploaderService extends IntentService {
      */
     public FileUploaderService(){
 
-       super("FileUploaderService");
-       myDriveId = settingActivity.myDriveId;
-       mSignInAccount = MainActivity.mGoogleSignInAccount;
-       mDriveClient = BaseDemoActivity.mDriveClient;
-       mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
+        super("FileUploaderService");
+        myDriveId = settingActivity.myDriveId;
+        mSignInAccount = MainActivity.mGoogleSignInAccount;
+        mDriveClient = BaseDemoActivity.mDriveClient;
+        mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
     }
     /**
      * The IntentService calls this method from the default worker thread with

@@ -16,9 +16,9 @@ package com.zjianhao.album;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -71,7 +71,7 @@ public abstract class BaseDemoActivity extends Activity {
     /**
      * Tracks completion of the drive picker
      */
-    private static TaskCompletionSource<DriveId> mOpenItemTaskSource;
+    private TaskCompletionSource<DriveId> mOpenItemTaskSource;
 
     @Override
     protected void onStart() {
@@ -110,7 +110,6 @@ public abstract class BaseDemoActivity extends Activity {
                     DriveId driveId = data.getParcelableExtra(
                             OpenFileActivityOptions.EXTRA_RESPONSE_DRIVE_ID);
                     mOpenItemTaskSource.setResult(driveId);
-                    settingActivity.myDriveId= driveId;
                 } else {
                     mOpenItemTaskSource.setException(new RuntimeException("Unable to open file"));
                 }
@@ -148,6 +147,20 @@ public abstract class BaseDemoActivity extends Activity {
         mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
         mDriveResourceClient = Drive.getDriveResourceClient(getApplicationContext(), signInAccount);
         onDriveClientReady();
+    }
+
+    /**
+     * Prompts the user to select a text file using OpenFileActivity.
+     *
+     * @return Task that resolves with the selected item's ID.
+     */
+    protected Task<DriveId> pickTextFile() {
+        OpenFileActivityOptions openOptions =
+                new OpenFileActivityOptions.Builder()
+                        .setSelectionFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
+                        .setActivityTitle(getString(R.string.select_file))
+                        .build();
+        return pickItem(openOptions);
     }
 
     /**

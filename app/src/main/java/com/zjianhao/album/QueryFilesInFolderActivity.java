@@ -54,6 +54,7 @@ public class QueryFilesInFolderActivity extends BaseDemoActivity  {
                 .addOnSuccessListener(this,
                         driveId -> {
                             listFilesInFolder(driveId.asDriveFolder());
+                            settingActivity.myDriveId=driveId;
                             finish(); // Return to Previous Activity - JuhunChoi
                         })
                 .addOnFailureListener(this, e -> {

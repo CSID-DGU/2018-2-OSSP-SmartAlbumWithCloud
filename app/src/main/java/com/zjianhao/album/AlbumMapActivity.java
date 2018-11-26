@@ -1,5 +1,6 @@
 package com.zjianhao.album;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -8,6 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.zjianhao.R;
+
 import android.view.View;
 
 
@@ -28,8 +30,9 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
 
     public void clickClose(View v)
     {
-        finish();
-    }//액티비티 종료
+        Intent intent = new Intent(this,ljhtestActivity.class);
+        startActivity(intent);
+    }//테스트용 액티비티와 연결되게 함.
 
     /**
      * Manipulates the map once available.
