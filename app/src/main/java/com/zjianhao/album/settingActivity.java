@@ -65,44 +65,7 @@ public class settingActivity extends Activity {
         final TextView tv = (TextView)findViewById(R.id.textView4); //값들어오는지 확인용
         s = (Spinner)findViewById(R.id.spinner_time);
         s.setEnabled(false);
-        dbs = getDatabase();
-        for(PhotoDatabase pdb : dbs)
-        {
-            if(pdb.location==null)
-            {
-                pdb.location="NoSuchLocation";
-            }
-            if(pdb.date==null)
-            {
-                pdb.date="NoSuchDate";
-            }
-            locations.add(pdb.location);
-            dates.add(pdb.date);
-        }
 
-        for(String loc : locations)
-        {
-            ArrayList<PhotoDatabase> mapArr = new ArrayList();
-            for(PhotoDatabase pdb : dbs)
-            {
-                if(pdb.location.equals(loc)) {
-                    mapArr.add(pdb);
-                }
-            }
-            photoListByLoc.put(loc,mapArr);
-        }
-
-        for (String date : dates)
-        {
-            ArrayList<PhotoDatabase> mapArr = new ArrayList();
-            for(PhotoDatabase pdb : dbs)
-            {
-                if(pdb.date.equals(date)) {
-                    mapArr.add(pdb);
-                }
-            }
-            photoListByDate.put(date,mapArr);
-        }//추가코드
 
 
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -134,6 +97,47 @@ public class settingActivity extends Activity {
 
     /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
+
+        dbs = getDatabase(mySetting.getSort_time_type());
+        for(PhotoDatabase pdb : dbs)
+        {
+            if(pdb.location==null)
+            {
+                pdb.location="NoSuchLocation";
+            }
+            if(pdb.date==null)
+            {
+                pdb.date="NoSuchDate";
+            }
+
+            locations.add(pdb.location);
+            dates.add(pdb.date);
+        }
+
+        for(String loc : locations)
+        {
+            ArrayList<PhotoDatabase> mapArr = new ArrayList();
+            for(PhotoDatabase pdb : dbs)
+            {
+                if(pdb.location.equals(loc)) {
+                    mapArr.add(pdb);
+                }
+            }
+            photoListByLoc.put(loc,mapArr);
+        }
+
+        for (String date : dates)
+        {
+            ArrayList<PhotoDatabase> mapArr = new ArrayList();
+            for(PhotoDatabase pdb : dbs)
+            {
+                if(pdb.date.equals(date)) {
+                    mapArr.add(pdb);
+                }
+            }
+            photoListByDate.put(date,mapArr);
+        }//추가코드
+
         EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
         if(mySetting.setCloud_directory(editText.getText().toString())) {  // 받아온 값을 string변수에 저장
             Log.d("Cloud Directory Set : ", mySetting.getCloud_directory());
@@ -164,8 +168,10 @@ public class settingActivity extends Activity {
             case SETTING_TIME: // Sort Type 이 time 이면~
                 switch (mySetting.getSort_time_type()) { // sub sort type을 점검한다
                     case SUB_SETTING_YEAR :
+                        dfm.copyFileByMap(result_selected_Path, dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_MONTH :
+                        dfm.copyFileByMap(result_selected_Path, dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_DAY :
                         dfm.copyFileByMap(result_selected_Path, dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
@@ -300,7 +306,7 @@ public class settingActivity extends Activity {
     }
 
 
-    public ArrayList<PhotoDatabase> getDatabase() {
+    public ArrayList<PhotoDatabase> getDatabase(int sortType) {
         ArrayList<PhotoDatabase> db = new ArrayList<>();
         Cursor mManagedCursor;
         mManagedCursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
@@ -328,8 +334,23 @@ public class settingActivity extends Activity {
                 Calendar cal = new GregorianCalendar();
                 cal.setTimeInMillis(date_taken);
                 Date d = cal.getTime();
-                SimpleDateFormat sd = new SimpleDateFormat("yyyy.MM.dd");//date 포맷을 바꾸고 싶다면 수정. 여기 수정하면 연도별,월별,일별 수정 가능
-                String date = sd.format(d);//극혐숫자로 반환된 datetaken을 날짜로 바꾸어주는식
+                SimpleDateFormat sd;
+                String date ="";
+                switch(sortType)
+                {
+                    case SUB_SETTING_DAY:
+                        sd = new SimpleDateFormat("yyyy.MM.dd");//date 포맷을 바꾸고 싶다면 수정. 여기 수정하면 연도별,월별,일별 수정 가능
+                        date += sd.format(d);//극혐숫자로 반환된 datetaken을 날짜로 바꾸어주는식
+                    break;
+                    case SUB_SETTING_MONTH:
+                        sd = new SimpleDateFormat("yyyy.MM");//date 포맷을 바꾸고 싶다면 수정. 여기 수정하면 연도별,월별,일별 수정 가능
+                        date += sd.format(d);//극혐숫자로 반환된 datetaken을 날짜로 바꾸어주는식
+                        break;
+                    case SUB_SETTING_YEAR:
+                        sd = new SimpleDateFormat("yyyy");
+                        date += sd.format(d);//극혐숫자로 반환된 datetaken을 날짜로 바꾸어주는식
+                        break;
+                }
 
                 PhotoDatabase pdb = new PhotoDatabase();
                 pdb.date=date;

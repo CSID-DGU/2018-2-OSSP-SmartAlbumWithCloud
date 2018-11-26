@@ -20,8 +20,9 @@ public class DirFileManager
 
     public void makeDir(String path, Set<String> strSet)
     {
-        String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String _path = sdPath+path;
+        //String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //_path=sdpath+path;
+        String _path = path;
         for(String str : strSet)
         {
 
@@ -59,8 +60,8 @@ public class DirFileManager
                 for(int i = 0; i<size; i++)
                 {
                     String inPath = map.get(str).get(i).path;
-                    String outPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                    outPath+=path+"/"+str+"/"+map.get(str).get(i).title;
+                    //String outPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                    String outPath=path+"/"+str+"/"+map.get(str).get(i).title;
                     copyFile(inPath,outPath);
                 }
             }
