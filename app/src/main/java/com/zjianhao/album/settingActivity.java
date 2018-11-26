@@ -39,26 +39,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.zjianhao.holder.SettingHolder.SETTING_LOCATION;
 import static com.zjianhao.holder.SettingHolder.SETTING_TIME;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_DAY;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_MONTH;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 
 public class settingActivity extends Activity {
+    DirFileManager dfm = new DirFileManager();
     private SettingHolder mySetting;
     private Spinner s;
+    private String result_selected_Path; // DirectoryChooserActivity에서 선택된 로컬디렉토리를 저장할 변수
     Map<String, ArrayList<PhotoDatabase>> photoListByLoc = new HashMap<>();
     Map<String, ArrayList<PhotoDatabase>> photoListByDate = new HashMap<>();
     Set<String> locations = new HashSet<>();
     Set<String> dates = new HashSet<>();
     ArrayList<PhotoDatabase> dbs = new ArrayList<>();
+    private int sortType = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         mySetting = new SettingHolder();
-        final TextView tv = (TextView)findViewById(R.id.textView4); //        값들어오는지 확인용
+        final TextView tv = (TextView)findViewById(R.id.textView4); //값들어오는지 확인용
         s = (Spinner)findViewById(R.id.spinner_time);
         s.setEnabled(false);
         dbs = getDatabase();
@@ -99,22 +103,19 @@ public class settingActivity extends Activity {
             }
             photoListByDate.put(date,mapArr);
         }//추가코드
-        DirFileManager dfm = new DirFileManager();
-        dfm.copyFileByMap("/DCIM/장소분류테스트",locations,photoListByLoc);//정상구동확인 BY LJH 18.11.24
-        dfm.copyFileByMap("/DCIM/날짜별분류테스트",dates,photoListByDate);
 
 
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case SUB_SETTING_YEAR: // Year
+                switch (position) {  // position은 0부터 시작인데, 셋팅홀더에서 YEAR=1,MONTh=2,DAY=3 으로 셋팅되어있어서 (-1) 해줌!
+                    case SUB_SETTING_YEAR-1: // Year
                         mySetting.setSort_time_type(SUB_SETTING_YEAR);
                         break;
-                    case SettingHolder.SUB_SETTING_MONTH: // Month
+                    case SettingHolder.SUB_SETTING_MONTH-1: // Month
                         mySetting.setSort_time_type(SUB_SETTING_MONTH);
                         break;
-                    case SettingHolder.SUB_SETTING_DAY: // Day
+                    case SettingHolder.SUB_SETTING_DAY-1: // Day
                         mySetting.setSort_time_type(SUB_SETTING_DAY);
                         break;
                     default:
@@ -131,12 +132,12 @@ public class settingActivity extends Activity {
         });
     }
 
-/* 설정값 저장하기 - 박상혁 */
+    /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
         EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
         if(mySetting.setCloud_directory(editText.getText().toString())) {  // 받아온 값을 string변수에 저장
             Log.d("Cloud Directory Set : ", mySetting.getCloud_directory());
-        }else{
+        }else {
             Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -156,7 +157,34 @@ public class settingActivity extends Activity {
             Toast.makeText(getApplicationContext(),"Check Your Time SubSort Option",Toast.LENGTH_SHORT).show();
             return;
         }
-        Toast.makeText(getApplicationContext(), "Setting Saved",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Setting Saved",Toast.LENGTH_LONG).show();
+
+        // 추가~~~~~~~~~~~~~~
+        switch (mySetting.getSort_type()) {
+            case SETTING_TIME: // Sort Type 이 time 이면~
+                switch (mySetting.getSort_time_type()) { // sub sort type을 점검한다
+                    case SUB_SETTING_YEAR :
+                        break;
+                    case SUB_SETTING_MONTH :
+                        break;
+                    case SUB_SETTING_DAY :
+                        dfm.copyFileByMap(result_selected_Path, dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
+                        break;
+                    default :
+                        Log.d("Unexpected Error", "settingActivity sub_sort_type unselected");
+                        break;
+                }
+                break;
+
+            case SETTING_LOCATION :// Sort Type 이 location 이면~
+                dfm.copyFileByMap(result_selected_Path, locations, photoListByLoc);
+                break;
+
+            default :
+                Log.d("Unexpected Error", "settingActivity sort_type unselected");
+                break;
+        }
+
         finish(); // Return to Previous Page
     }
 
@@ -168,7 +196,7 @@ public class settingActivity extends Activity {
     }
 
     public void click_radioButton_location(View view) {
-        mySetting.setSort_type(SettingHolder.SETTING_LOCATION);
+        mySetting.setSort_type(SETTING_LOCATION);
         s.setEnabled(false);
 //        numStr = String.valueOf(sort_type);    // 값이 잘 들어오는지 확인용 Toast
 //        Toast.makeText(this, numStr, Toast.LENGTH_SHORT).show();
@@ -184,12 +212,25 @@ public class settingActivity extends Activity {
                 .build();
 
         intent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
-
-        startActivity(intent);
+        startActivityForResult(intent, 1088);
     }
     public void click_cloud_directory_setting(View view){
         Intent intent = new Intent(getApplicationContext(),QueryFilesInFolderActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  // DirectoryChooserActivity에서 설정한 경로 받아와서 텍스트박스에 띄워주기
+        if(requestCode == 1088) {
+            try {
+                EditText et = (EditText) findViewById(R.id.local_Directory);
+                result_selected_Path = data.getStringExtra("RESULT_DIR");
+                Log.d("PATH", result_selected_Path);
+                et.setText(result_selected_Path);
+            }catch (NullPointerException e) {
+                result_selected_Path = "";
+            }
+        }
     }
 
 
@@ -202,7 +243,6 @@ public class settingActivity extends Activity {
         Cursor cursor = getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_ADDED + " desc");
         int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         int columnDisplayname = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
-
 
         int lastIndex;
         while (cursor.moveToNext()) {
@@ -310,6 +350,3 @@ public class settingActivity extends Activity {
 
 
 }
-
-
-
