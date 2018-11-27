@@ -91,6 +91,8 @@ public class FileUploaderService extends IntentService {
         createFolder("Temp아아아");
         Log.d("FileUploaderService", "Normal Execution");
 
+
+        // Sort Local Directory by Settings
         sortLocalDirectory();
 
 

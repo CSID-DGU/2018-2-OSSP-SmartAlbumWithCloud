@@ -52,7 +52,9 @@
         android:id="@+id/directoryInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
 
         <ImageButton
             android:id="@+id/btnNavUp"
@@ -70,38 +72,37 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
             android:layout_toRightOf="@id/btnNavUp"
             android:text="@string/selected_folder_label"
-            android:textStyle="bold" >
-        </TextView>
+            android:textStyle="bold"></TextView>
 
         <TextView
             android:id="@+id/txtvSelectedFolder"
-            android:layout_below="@id/txtvSelectedFolderLabel"
-            android:layout_toRightOf="@id/btnNavUp"
-            android:layout_toLeftOf="@+id/btnCreateFolder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="start"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
+            android:layout_below="@id/txtvSelectedFolderLabel"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            />
+            android:layout_toLeftOf="@+id/btnCreateFolder"
+            android:layout_toRightOf="@id/btnNavUp"
+            android:ellipsize="start"
+            android:scrollHorizontally="true"
+            android:singleLine="true" />
 
         <ImageButton
-                android:id="@+id/btnCreateFolder"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:contentDescription="@string/create_folder_label"
-                android:background="@drawable/borderless_button"
-                android:src="@drawable/ic_action_create"
-                />
+            android:id="@+id/btnCreateFolder"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/borderless_button"
+            android:contentDescription="@string/create_folder_label"
+            android:src="@drawable/ic_action_create" />
 
         <View
             android:id="@+id/divider"
@@ -109,6 +110,7 @@
             android:layout_height="1dp"
             android:layout_below="@id/btnNavUp"
             android:background="@color/bright_blue" />
+
     </RelativeLayout>
 
     <ListView

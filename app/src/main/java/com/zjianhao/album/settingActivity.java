@@ -63,8 +63,6 @@ public class settingActivity extends Activity {
         s = (Spinner)findViewById(R.id.spinner_time);
         s.setEnabled(false);
 
-
-
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

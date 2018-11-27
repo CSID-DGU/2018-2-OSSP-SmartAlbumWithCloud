@@ -208,7 +208,7 @@ public class DirectoryChooserFragment extends DialogFragment {
         });
 
         if (!getShowsDialog()) {
-            mBtnCreateFolder.setVisibility(View.GONE);
+            mBtnCreateFolder.setVisibility(View.VISIBLE);
         }
 
         adjustResourceLightness();
