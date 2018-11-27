@@ -1,27 +1,40 @@
 package com.zjianhao.album;
 
 import android.app.IntentService;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveClient;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.DriveResourceClient;
-import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.zjianhao.R;
 import com.zjianhao.holder.SettingHolder;
 
@@ -29,10 +42,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Time;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -88,13 +113,15 @@ public class FileUploaderService extends IntentService {
         myDriveId = settingActivity.myDriveId;
         String folderId = myDriveId.asDriveFolder().toString();
         mySetting = settingActivity.mySetting;
-        createFolder("Temp아아아");
+
+
+        //DriveFolder df = createFolder("Temp아아아");
         Log.d("FileUploaderService", "Normal Execution");
 
 
         // Sort Local Directory by Settings
         sortLocalDirectory();
-
+        uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
 
 
 
@@ -105,8 +132,8 @@ public class FileUploaderService extends IntentService {
      * Create Folder
      * @param folderName
      */
-    protected void createFolder(String folderName){
-
+    protected DriveFolder createFolder(String folderName){
+        DriveFolder newId = null;
         mDriveResourceClient
                 .getRootFolder()
                 .continueWithTask(task -> {
@@ -116,17 +143,81 @@ public class FileUploaderService extends IntentService {
                             .setMimeType(DriveFolder.MIME_TYPE)
                             .setStarred(false)
                             .build();
+
                     return mDriveResourceClient.createFolder(parentFolder, changeSet);
+                }).addOnSuccessListener(DriveResourceClient->{
+
+                });
+        return newId;
+    }
+
+    protected void uploadFile(java.io.File fileContent){
+        String dir = fileContent.getPath();
+        /*
+        DriveContents mDriveContents = null;
+        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+               .setTitle(fileContent.getName())
+               .setMimeType("text/plain")
+               .setStarred(false)
+               .build();
+        */
+
+        final Task<DriveFolder> rootFolderTask = mDriveResourceClient.getRootFolder();
+        final Task<DriveContents> createContentsTask = mDriveResourceClient.createContents();
+
+        Tasks.whenAll(rootFolderTask, createContentsTask)
+                .continueWithTask(task -> {
+                    char[] buffer = new char[1048];
+                    DriveFolder parent = myDriveId.asDriveFolder();
+                    DriveContents contents = createContentsTask.getResult();
+                    OutputStream outputStream = contents.getOutputStream();
+                    Writer writer = new OutputStreamWriter(outputStream);
+
+
+
+                    FileReader fr = new FileReader(dir);
+                    BufferedReader br = new BufferedReader(fr);
+
+                    while(br.read(buffer) != -1){
+                        writer.write(buffer);
+                        buffer = new char[1024];
+                    }
+                    writer.close();
+
+
+                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                            .setTitle(fileContent.getName())
+                            .setMimeType("jpg/plain")
+                            .build();
+
+
+
+                    return mDriveResourceClient.createFile(parent, changeSet, contents);
+                }).addOnSuccessListener(DriveFile->{
+
+                }).addOnFailureListener(DriveFile->{
+
                 });
 
+
+
+        /*
+        CreateFileActivityOptions createOptions = new CreateFileActivityOptions.Builder()
+                .setInitialDriveContents(mDriveContents)
+                .setInitialMetadata(changeSet)
+                .build();
+                */
     }
 
-    protected void uploadFile(){
+    public static char[] byteToChar(byte[] array) {
 
+        char[] result = new char[array.length];
+
+        for (int i = 0; i < array.length; i++) {
+            result[i] = (char) array[i];
+        }
+        return result;
     }
-
-
-
     private ArrayList<String> getPathOfAllImages() {
         ArrayList<String> result = new ArrayList<>();
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
