@@ -47,8 +47,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -153,44 +155,29 @@ public class FileUploaderService extends IntentService {
 
     protected void uploadFile(java.io.File fileContent){
         String dir = fileContent.getPath();
-        /*
-        DriveContents mDriveContents = null;
-        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-               .setTitle(fileContent.getName())
-               .setMimeType("text/plain")
-               .setStarred(false)
-               .build();
-        */
 
         final Task<DriveFolder> rootFolderTask = mDriveResourceClient.getRootFolder();
         final Task<DriveContents> createContentsTask = mDriveResourceClient.createContents();
 
         Tasks.whenAll(rootFolderTask, createContentsTask)
                 .continueWithTask(task -> {
-                    char[] buffer = new char[1048];
-                    DriveFolder parent = myDriveId.asDriveFolder();
                     DriveContents contents = createContentsTask.getResult();
-                    OutputStream outputStream = contents.getOutputStream();
-                    Writer writer = new OutputStreamWriter(outputStream);
+                    DriveFolder parent = myDriveId.asDriveFolder();
 
-
-
-                    FileReader fr = new FileReader(dir);
-                    BufferedReader br = new BufferedReader(fr);
-
-                    while(br.read(buffer) != -1){
-                        writer.write(buffer);
-                        buffer = new char[1024];
+                    InputStream is = new FileInputStream(new File(dir));
+                    OutputStream os = contents.getOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = is.read(buffer)) > 0) {
+                        os.write(buffer, 0, length);
                     }
-                    writer.close();
-
+                    is.close();
+                    os.close();
 
                     MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                             .setTitle(fileContent.getName())
-                            .setMimeType("jpg/plain")
+                            //.setMimeType("jpg/plain")
                             .build();
-
-
 
                     return mDriveResourceClient.createFile(parent, changeSet, contents);
                 }).addOnSuccessListener(DriveFile->{
