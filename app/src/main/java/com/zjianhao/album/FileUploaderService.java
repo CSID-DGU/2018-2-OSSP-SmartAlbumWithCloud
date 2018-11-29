@@ -79,7 +79,7 @@ import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 //https://developer.android.com/guide/components/services#Basics
 public class FileUploaderService extends IntentService {
     DirFileManager dfm = new DirFileManager();
-    private SettingHolder mySetting;
+    public static SettingHolder mySetting;
     private Spinner s;
     Map<String, ArrayList<PhotoDatabase>> photoListByLoc = new HashMap<>();
     Map<String, ArrayList<PhotoDatabase>> photoListByDate = new HashMap<>();
@@ -88,11 +88,8 @@ public class FileUploaderService extends IntentService {
     ArrayList<PhotoDatabase> dbs = new ArrayList<>();
 
 
-    private GoogleSignInAccount mSignInAccount;
-    private DriveResourceClient mDriveResourceClient;
-    private DriveClient mDriveClient;
-    private DriveId myDriveId; // Main Folder
-    private List<DriveId> childDriveList;
+
+
     /**
      * A constructor is required, and must call the super IntentService(String)
      * constructor with a name for the worker thread.
@@ -100,10 +97,7 @@ public class FileUploaderService extends IntentService {
     public FileUploaderService(){
 
         super("FileUploaderService");
-        myDriveId = settingActivity.myDriveId;
-        mSignInAccount = MainActivity.mGoogleSignInAccount;
-        mDriveClient = BaseDemoActivity.mDriveClient;
-        mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
+
     }
     /**
      * The IntentService calls this method from the default worker thread with
@@ -112,8 +106,6 @@ public class FileUploaderService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent){
-        myDriveId = settingActivity.myDriveId;
-        String folderId = myDriveId.asDriveFolder().toString();
         mySetting = settingActivity.mySetting;
 
 
@@ -123,78 +115,16 @@ public class FileUploaderService extends IntentService {
 
         // Sort Local Directory by Settings
         sortLocalDirectory();
-        uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
-
-
-
+        //uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
+        try {
+            wait(1000 * 60 * 10);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
-    /**
-     * Create Folder
-     * @param folderName
-     */
-    protected DriveFolder createFolder(String folderName){
-        DriveFolder newId = null;
-        mDriveResourceClient
-                .getRootFolder()
-                .continueWithTask(task -> {
-                    DriveFolder parentFolder = myDriveId.asDriveFolder();
-                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                            .setTitle(folderName)
-                            .setMimeType(DriveFolder.MIME_TYPE)
-                            .setStarred(false)
-                            .build();
 
-                    return mDriveResourceClient.createFolder(parentFolder, changeSet);
-                }).addOnSuccessListener(DriveResourceClient->{
-
-                });
-        return newId;
-    }
-
-    protected void uploadFile(java.io.File fileContent){
-        String dir = fileContent.getPath();
-
-        final Task<DriveFolder> rootFolderTask = mDriveResourceClient.getRootFolder();
-        final Task<DriveContents> createContentsTask = mDriveResourceClient.createContents();
-
-        Tasks.whenAll(rootFolderTask, createContentsTask)
-                .continueWithTask(task -> {
-                    DriveContents contents = createContentsTask.getResult();
-                    DriveFolder parent = myDriveId.asDriveFolder();
-
-                    InputStream is = new FileInputStream(new File(dir));
-                    OutputStream os = contents.getOutputStream();
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while ((length = is.read(buffer)) > 0) {
-                        os.write(buffer, 0, length);
-                    }
-                    is.close();
-                    os.close();
-
-                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                            .setTitle(fileContent.getName())
-                            //.setMimeType("jpg/plain")
-                            .build();
-
-                    return mDriveResourceClient.createFile(parent, changeSet, contents);
-                }).addOnSuccessListener(DriveFile->{
-
-                }).addOnFailureListener(DriveFile->{
-
-                });
-
-
-
-        /*
-        CreateFileActivityOptions createOptions = new CreateFileActivityOptions.Builder()
-                .setInitialDriveContents(mDriveContents)
-                .setInitialMetadata(changeSet)
-                .build();
-                */
-    }
 
     public static char[] byteToChar(byte[] array) {
 
