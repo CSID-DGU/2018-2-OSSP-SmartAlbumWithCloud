@@ -215,7 +215,6 @@ public class FileUploaderService extends IntentService {
             locations.add(pdb.location);
             dates.add(pdb.date);
         }
-
         for(String loc : locations)
         {
             ArrayList<PhotoDatabase> mapArr = new ArrayList();
@@ -227,7 +226,6 @@ public class FileUploaderService extends IntentService {
             }
             photoListByLoc.put(loc,mapArr);
         }
-
         for (String date : dates)
         {
             ArrayList<PhotoDatabase> mapArr = new ArrayList();
@@ -245,12 +243,15 @@ public class FileUploaderService extends IntentService {
             case SETTING_TIME: // Sort Type 이 time 이면~
                 switch (mySetting.getSort_time_type()) { // sub sort type을 점검한다
                     case SUB_SETTING_YEAR :
+                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_MONTH :
+                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_DAY :
+                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     default :
@@ -260,6 +261,7 @@ public class FileUploaderService extends IntentService {
                 break;
 
             case SETTING_LOCATION :// Sort Type 이 location 이면~
+                dfm.uploadFIleByMap(mySetting.getLocal_directory(), locations, photoListByLoc);
                 dfm.copyFileByMap(mySetting.getLocal_directory(), locations, photoListByLoc);
                 break;
 
