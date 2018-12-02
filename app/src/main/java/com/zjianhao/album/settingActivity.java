@@ -8,18 +8,14 @@ import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.drive.DriveId;
@@ -50,40 +46,23 @@ import static com.zjianhao.holder.SettingHolder.SUB_SETTING_DAY;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_MONTH;
 import static com.zjianhao.holder.SettingHolder.SUB_SETTING_YEAR;
 
-public class settingActivity extends Activity implements TimePicker.OnTimeChangedListener {
+public class settingActivity extends Activity {
 
     public static SettingHolder mySetting;
     private Spinner s;
-    TimePicker mTimePicker;
-    public static DriveId myDriveId = null;
 
-    private CheckBox[] checkBoxes;
-    private CheckBox checkBox_MON, checkBox_TUE, checkBox_WED, checkBox_THU,
-                      checkBox_FRI, checkBox_SAT, checkBox_SUN, checkBox_ALL;
+
+    public static DriveId myDriveId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         mySetting = new SettingHolder();
+        final TextView tv = (TextView)findViewById(R.id.textView4); //값들어오는지 확인용
         s = (Spinner)findViewById(R.id.spinner_time);
-        mTimePicker = (TimePicker)findViewById(R.id.upload_time);
-        mTimePicker.setOnTimeChangedListener(this);
-        checkBox_MON = (CheckBox)findViewById(R.id.checkBox_mon);
-        checkBox_TUE = (CheckBox)findViewById(R.id.checkBox_tue);
-        checkBox_WED = (CheckBox)findViewById(R.id.checkBox_wed);
-        checkBox_THU = (CheckBox)findViewById(R.id.checkBox_thu);
-        checkBox_FRI = (CheckBox)findViewById(R.id.checkBox_fri);
-        checkBox_SAT = (CheckBox)findViewById(R.id.checkBox_sat);
-        checkBox_SUN = (CheckBox)findViewById(R.id.checkBox_sun);
-        checkBox_ALL = (CheckBox)findViewById(R.id.checkBox_all);
-
-        checkBoxes = new CheckBox[] {
-                checkBox_MON, checkBox_TUE, checkBox_WED, checkBox_THU,
-                checkBox_FRI, checkBox_SAT, checkBox_SUN
-        };
-
         s.setEnabled(false);
+
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,47 +80,18 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
                         Log.d("Unexpected Error", "settingActivity SUB_SETTING error");
                         break;
                 }
+                //tv.setText(""+ parent.getItemAtPosition(position)); //선택한 내용이 잘들어오는지 확인용
+                //tv.setText(""+ sort_time_type); // 잘 저장되는지 확인용
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-        checkBox_ALL.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) { // All 체크하면 나머지 다 체크하기
-                    for(int i=0; i<checkBoxes.length; i++) {
-                        checkBoxes[i].setChecked(true);
-                    }
-                }
-            }
-        });
-    }
-    @Override
-    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {  // TimePicker 에서 시간 받아서 저장하기
-        mySetting.setTimePicker_HourOfDay(hourOfDay);
-        mySetting.setTimePicker_Minute(minute);
-        //Toast.makeText(this, mySetting.getTimePicker_HourOfDay()+ " " + mySetting.getTimePicker_Minute(), Toast.LENGTH_SHORT).show();   //시간 잘 받아지는지 확인용
     }
 
     /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
-
-        mySetting.clear_Selected_Upload_Day(); // 배열 비우기
-        for(int i=0; i<checkBoxes.length; i++) { // 만약 체크가 되어있는 놈들이면~ 배열에다가 add해줌
-            if (checkBoxes[i].isChecked()) mySetting.add_Selected_Upload_Day(mySetting.getCheckbox(i));
-        }
-
-        //값들어오는거 확인용
-        String str = "";
-        for(int i=0; i<mySetting.size_Selected_Upload_Day(); i++) {
-            str += mySetting.get_Selected_Upload_Day(i);
-        }
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-
-
 
         EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
 
@@ -227,4 +177,8 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
             }
         }
     }
+
+
+
+
 }
