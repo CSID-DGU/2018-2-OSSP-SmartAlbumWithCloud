@@ -13,6 +13,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -36,6 +38,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.zjianhao.R;
+import com.zjianhao.fragments.AlbumFragment;
 import com.zjianhao.holder.SettingHolder;
 
 import org.json.JSONArray;
@@ -116,11 +119,7 @@ public class FileUploaderService extends IntentService {
         // Sort Local Directory by Settings
         sortLocalDirectory();
         //uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
-        try {
-            wait(1000 * 60 * 10);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        onDestroy();
     }
 
 
@@ -238,20 +237,21 @@ public class FileUploaderService extends IntentService {
             photoListByDate.put(date,mapArr);
         }//추가코드
 
+
         // 추가~~~~~~~~~~~~~~
         switch (mySetting.getSort_type()) {
             case SETTING_TIME: // Sort Type 이 time 이면~
                 switch (mySetting.getSort_time_type()) { // sub sort type을 점검한다
                     case SUB_SETTING_YEAR :
-                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
+                        //dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_MONTH :
-                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
+                        //dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     case SUB_SETTING_DAY :
-                        dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
+                        //dfm.uploadFIleByMap(mySetting.getLocal_directory(), dates, photoListByDate);
                         dfm.copyFileByMap(mySetting.getLocal_directory(), dates, photoListByDate); //절대경로 store/emulator/0 붙어있는거 때버려야할듯
                         break;
                     default :
@@ -261,7 +261,7 @@ public class FileUploaderService extends IntentService {
                 break;
 
             case SETTING_LOCATION :// Sort Type 이 location 이면~
-                dfm.uploadFIleByMap(mySetting.getLocal_directory(), locations, photoListByLoc);
+                //dfm.uploadFIleByMap(mySetting.getLocal_directory(), locations, photoListByLoc);
                 dfm.copyFileByMap(mySetting.getLocal_directory(), locations, photoListByLoc);
                 break;
 

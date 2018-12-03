@@ -31,10 +31,10 @@ import butterknife.InjectView;
 public class AlbumFragment extends Fragment {
     @InjectView(R.id.local_album_list)
     RecyclerView localAlbumList;
-    private AlbumAdapter adapter;
+    public static AlbumAdapter adapter;
 
-    private List<Album> albums = new ArrayList<>();
-    private Handler handler = new Handler(){
+    public static List<Album> albums = new ArrayList<>();
+    public static Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

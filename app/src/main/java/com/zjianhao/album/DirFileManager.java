@@ -1,10 +1,17 @@
 package com.zjianhao.album;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.drive.CreateFileActivityOptions;
 import com.google.android.gms.drive.DriveClient;
 import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
@@ -16,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.zjianhao.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +31,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -60,17 +74,41 @@ public class DirFileManager
             }
             outputStream.close();
             inputStream.close();
+
+            (new File(_from)).delete(); //  Original File Deletion
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void uploadFIleByMap(String path, Set<String> strSet, Map<String, ArrayList<PhotoDatabase>> map){
+//    public void uploadFIleByMap(String path, Set<String> strSet, Map<String, ArrayList<PhotoDatabase>> map){
+//        myDriveId = settingActivity.myDriveId;
+//        mSignInAccount = MainActivity.mGoogleSignInAccount;
+//        mDriveClient = BaseDemoActivity.mDriveClient;
+//        mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
+//        myDriveId = settingActivity.myDriveId;
+//        String folderId = myDriveId.asDriveFolder().toString();
+//
+//        for(String str : strSet)
+//        {
+//            DriveFolder df= createFolder(str);
+//            int size = map.get(str).size();
+//            for(int i = 0; i<size; i++)
+//            {
+//                String inPath = map.get(str).get(i).path;
+//                uploadFile(df, new File(inPath));
+//            }
+//        }
+//    }
+    public void copyFileByMap(String path, Set<String> strSet, Map<String,ArrayList<PhotoDatabase>> map)//path는 makeDir에 넣었던 그대로
+    {
         myDriveId = settingActivity.myDriveId;
         mSignInAccount = MainActivity.mGoogleSignInAccount;
         mDriveClient = BaseDemoActivity.mDriveClient;
         mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
         myDriveId = settingActivity.myDriveId;
-        String folderId = myDriveId.asDriveFolder().toString();
+
+        makeDir(path,strSet);
 
         for(String str : strSet)
         {
@@ -79,22 +117,12 @@ public class DirFileManager
             for(int i = 0; i<size; i++)
             {
                 String inPath = map.get(str).get(i).path;
-                uploadFile(df, new File(inPath));
-            }
-        }
-    }
-    public void copyFileByMap(String path, Set<String> strSet, Map<String,ArrayList<PhotoDatabase>> map)//path는 makeDir에 넣었던 그대로
-    {
-        makeDir(path,strSet);
-
-        for(String str : strSet)
-        {
-            int size = map.get(str).size();
-            for(int i = 0; i<size; i++)
-            {
-                String inPath = map.get(str).get(i).path;
                 String outPath=path+"/"+str+"/"+map.get(str).get(i).title;
-                copyFile(inPath,outPath);
+                if(inPath.equals(outPath)==false) { // Filter out same file
+                    copyFile(inPath, outPath);
+                    uploadFile(df, new File(outPath));
+                    Log.d("DIRDIR:",inPath+"\t\t"+outPath);
+                }
             }
         }
     }
@@ -103,25 +131,29 @@ public class DirFileManager
      * Create Folder
      * @param folderName
      */
-    public DriveFolder createFolder(String folderName){
-        DriveFolder df = null;
-        DriveFolder parentFolder = myDriveId.asDriveFolder();
-        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                .setTitle(folderName)
-                .setMimeType(DriveFolder.MIME_TYPE)
-                .setStarred(false)
-                .build();
+    /**
+     * Create Folder
+     * @param folderName
+     */
+    protected DriveFolder createFolder(String folderName){
+        DriveFolder newId = null;
+        Task<DriveFolder> mtask = mDriveResourceClient
+                .getRootFolder()
+                .continueWithTask(task -> {
+                    DriveFolder parentFolder = myDriveId.asDriveFolder();
+                    MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                            .setTitle(folderName)
+                            .setMimeType(DriveFolder.MIME_TYPE)
+                            .setStarred(false)
+                            .build();
 
-        Task<DriveFolder> mTask = mDriveResourceClient.createFolder(parentFolder, changeSet);
-        while(!mTask.isComplete()){
-            try{
-                wait(1000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-        df = mTask.getResult();
-        return df;
+                    return mDriveResourceClient.createFolder(parentFolder, changeSet);
+                }).addOnSuccessListener(DriveResourceClient->{
+
+        });
+        while(!mtask.isComplete());
+        newId = mtask.getResult();
+        return newId;
     }
 
     public void uploadFile(DriveFolder df , java.io.File fileContent){
@@ -150,14 +182,15 @@ public class DirFileManager
                             //.setMimeType("jpg/plain")
                             .build();
                     Task<DriveFile> mtask = mDriveResourceClient.createFile(parent,changeSet,contents);
-                    while(!mtask.isComplete()){
-                        try{
-                            wait(1000);
-                        }catch(Exception e){
-                            e.printStackTrace();
-                        }
-                    }
-                    return mtask;
+//                    while(!mtask.isComplete()){
+//                        try{
+//                            wait(1000);
+//                        }catch(Exception e){
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    return mtask;
+                    return null;
                 }).addOnSuccessListener(DriveFile->{
             Log.d("File Upload Success : ", dir);
         }).addOnFailureListener(DriveFile->{
