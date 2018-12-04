@@ -1,13 +1,14 @@
 package com.zjianhao.album;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentSender;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
+import android.provider.MediaStore.Images;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -43,6 +44,7 @@ import java.util.Set;
 
 public class DirFileManager
 {
+    public static Context context;
     public static GoogleSignInAccount mSignInAccount;
     public static DriveResourceClient mDriveResourceClient;
     public static DriveClient mDriveClient;
@@ -65,19 +67,52 @@ public class DirFileManager
     public void copyFile(String _from,String _to)
     {
         try {
-            FileInputStream inputStream = new FileInputStream(_from);
-            FileOutputStream outputStream = new FileOutputStream(_to);
-            int bytesRead = 0;
-            byte[] buffer = new byte[1024];
-            while ((bytesRead = inputStream.read(buffer, 0, 1024)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-            outputStream.close();
-            inputStream.close();
+            File from = new File(_from);
+            File to = new File(_to);
+            from.renameTo(to);
 
-            (new File(_from)).delete(); //  Original File Deletion
+            String oldFilePath = to.getAbsolutePath().replace(_from, _to);
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.MediaColumns.DATA, to.getAbsolutePath());
+            int rows = context.getContentResolver().update(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, values,
+                    MediaStore.MediaColumns.DATA + "='" + oldFilePath + "'", null
+            );
+            MediaScannerConnection.scanFile(context,
+                    new String[] { _from }, null,null);
+            MediaScannerConnection.scanFile(context,
+                    new String[] { _to }, null,null);
 
-        } catch (IOException e) {
+
+//            FileInputStream inputStream = new FileInputStream(_from);
+//            FileOutputStream outputStream = new FileOutputStream(_to);
+//            int bytesRead = 0;
+//            byte[] buffer = new byte[1024];
+//            while ((bytesRead = inputStream.read(buffer, 0, 1024)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//            outputStream.close();
+//            inputStream.close();
+
+            //(new File(_from)).delete(); //  Original File Deletion
+//            File photoLcl = new File(_from);
+//            Uri imageUriLcl = FileProvider.getUriForFile(context,
+//                    context.getPackageName() +
+//                            ".provider", photoLcl);
+//            ContentResolver contentResolver = context.getContentResolver();
+//            contentResolver.delete(imageUriLcl, null, null);
+//            //context.getContentResolver().delete(Uri.fromFile(new File(_from)),null ,null);
+//
+//            (new File(_from)).delete(); //  Original File Deletion
+
+//            ContentValues values = new ContentValues();
+//            values.put(MediaStore.MediaColumns.DATA, _to);
+//            int rows = context.getContentResolver().update(
+//                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, values,
+//                    MediaStore.MediaColumns.DATA + "='" + _from + "'", null
+//            );
+            //(new File(_from)).delete(); //  Original File Deletion
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -125,6 +160,7 @@ public class DirFileManager
                 }
             }
         }
+        deleteEmptyFolder(new File(path));
     }
 
     /**
@@ -156,6 +192,11 @@ public class DirFileManager
         return newId;
     }
 
+    /**
+     * Upload one file to Google Drive within DriveFolder - Juhun Choi
+     * @param df
+     * @param fileContent
+     */
     public void uploadFile(DriveFolder df , java.io.File fileContent){
         String dir = fileContent.getPath();
 
@@ -182,19 +223,29 @@ public class DirFileManager
                             //.setMimeType("jpg/plain")
                             .build();
                     Task<DriveFile> mtask = mDriveResourceClient.createFile(parent,changeSet,contents);
-//                    while(!mtask.isComplete()){
-//                        try{
-//                            wait(1000);
-//                        }catch(Exception e){
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    return mtask;
                     return null;
                 }).addOnSuccessListener(DriveFile->{
             Log.d("File Upload Success : ", dir);
         }).addOnFailureListener(DriveFile->{
             Log.e("File Upload Success : ", dir);
         });
+    }
+
+    /**
+     * Delete Empty Folders within root Folder - Juhun Choi
+     * @param rootFolder
+     */
+    public static void deleteEmptyFolder(File rootFolder){
+        if (!rootFolder.isDirectory()) return;
+
+        File[] childFiles = rootFolder.listFiles();
+        if (childFiles==null) return;
+        if (childFiles.length == 0){
+            rootFolder.delete();
+        } else {
+            for (File childFile : childFiles){
+                deleteEmptyFolder(childFile);
+            }
+        }
     }
 }

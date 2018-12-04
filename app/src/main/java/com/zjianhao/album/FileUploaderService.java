@@ -13,6 +13,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
@@ -90,9 +91,6 @@ public class FileUploaderService extends IntentService {
     Set<String> dates = new HashSet<>();
     ArrayList<PhotoDatabase> dbs = new ArrayList<>();
 
-
-
-
     /**
      * A constructor is required, and must call the super IntentService(String)
      * constructor with a name for the worker thread.
@@ -115,9 +113,10 @@ public class FileUploaderService extends IntentService {
         //DriveFolder df = createFolder("Temp아아아");
         Log.d("FileUploaderService", "Normal Execution");
 
-
+        DirFileManager.context = getApplicationContext();
         // Sort Local Directory by Settings
         sortLocalDirectory();
+
         //uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
         onDestroy();
     }

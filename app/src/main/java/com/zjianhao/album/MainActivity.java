@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         ButterKnife.inject(this);
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -205,15 +204,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         /** Initial Title combine (only one time) */
         titles.add(getString(R.string.photo));
         titles.add(getString(R.string.album));
-        titles.add(getString(R.string.cloud));
+        //titles.add(getString(R.string.cloud));
         photoFragment = new PhotoFragment();
         fragments.add(photoFragment);
         albumFragment = new AlbumFragment();
         fragments.add(albumFragment);
-        cloudFragment = new CloudFragment();
-        fragments.add(cloudFragment);
-
-
+        //cloudFragment = new CloudFragment();
+        //fragments.add(cloudFragment);
     }
 
     // Ask for Permission if not granted
