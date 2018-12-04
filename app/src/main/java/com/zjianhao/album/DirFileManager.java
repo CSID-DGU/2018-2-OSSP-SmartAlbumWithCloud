@@ -49,6 +49,7 @@ public class DirFileManager
     public static DriveResourceClient mDriveResourceClient;
     public static DriveClient mDriveClient;
     public static DriveId myDriveId; // Main Folder
+    private static List<String> Name;
     public void makeDir(String path, Set<String> strSet)
     {
         //String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -79,62 +80,15 @@ public class DirFileManager
                     MediaStore.MediaColumns.DATA + "='" + oldFilePath + "'", null
             );
             MediaScannerConnection.scanFile(context,
-                    new String[] { _from }, null,null);
+                    new String[] { _from }, null, null);
             MediaScannerConnection.scanFile(context,
-                    new String[] { _to }, null,null);
+                    new String[]{_to}, null, null);
 
-
-//            FileInputStream inputStream = new FileInputStream(_from);
-//            FileOutputStream outputStream = new FileOutputStream(_to);
-//            int bytesRead = 0;
-//            byte[] buffer = new byte[1024];
-//            while ((bytesRead = inputStream.read(buffer, 0, 1024)) != -1) {
-//                outputStream.write(buffer, 0, bytesRead);
-//            }
-//            outputStream.close();
-//            inputStream.close();
-
-            //(new File(_from)).delete(); //  Original File Deletion
-//            File photoLcl = new File(_from);
-//            Uri imageUriLcl = FileProvider.getUriForFile(context,
-//                    context.getPackageName() +
-//                            ".provider", photoLcl);
-//            ContentResolver contentResolver = context.getContentResolver();
-//            contentResolver.delete(imageUriLcl, null, null);
-//            //context.getContentResolver().delete(Uri.fromFile(new File(_from)),null ,null);
-//
-//            (new File(_from)).delete(); //  Original File Deletion
-
-//            ContentValues values = new ContentValues();
-//            values.put(MediaStore.MediaColumns.DATA, _to);
-//            int rows = context.getContentResolver().update(
-//                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, values,
-//                    MediaStore.MediaColumns.DATA + "='" + _from + "'", null
-//            );
-            //(new File(_from)).delete(); //  Original File Deletion
+            wait(500);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-//    public void uploadFIleByMap(String path, Set<String> strSet, Map<String, ArrayList<PhotoDatabase>> map){
-//        myDriveId = settingActivity.myDriveId;
-//        mSignInAccount = MainActivity.mGoogleSignInAccount;
-//        mDriveClient = BaseDemoActivity.mDriveClient;
-//        mDriveResourceClient = BaseDemoActivity.mDriveResourceClient;
-//        myDriveId = settingActivity.myDriveId;
-//        String folderId = myDriveId.asDriveFolder().toString();
-//
-//        for(String str : strSet)
-//        {
-//            DriveFolder df= createFolder(str);
-//            int size = map.get(str).size();
-//            for(int i = 0; i<size; i++)
-//            {
-//                String inPath = map.get(str).get(i).path;
-//                uploadFile(df, new File(inPath));
-//            }
-//        }
-//    }
     public void copyFileByMap(String path, Set<String> strSet, Map<String,ArrayList<PhotoDatabase>> map)//path는 makeDir에 넣었던 그대로
     {
         myDriveId = settingActivity.myDriveId;

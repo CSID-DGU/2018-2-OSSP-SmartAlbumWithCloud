@@ -86,6 +86,8 @@ public class DbHelper extends Context {
                 String bucket_display_name = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME)); // 버킷의 이름
                 String bucket_id = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.BUCKET_ID)); // 버킷 ID
                 long date_taken = mManagedCursor.getLong(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_TAKEN)); // 촬영날짜. 1/1000초 단위
+                long date_add = mManagedCursor.getLong(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_ADDED));
+                long date_modify = mManagedCursor.getLong(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_MODIFIED));
                 String description = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DESCRIPTION)); // Image에 대한 설명
                 String is_private = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.IS_PRIVATE)); // 공개 여부
                 Double latitude =mManagedCursor.getDouble(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.LATITUDE)); // 위도
@@ -99,7 +101,12 @@ public class DbHelper extends Context {
                 String display_name = mManagedCursor.getString( mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)); // 파일 표시명
                 String date_modified =mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_MODIFIED)); // 최후 갱신 날짜. 초단위
                 Long date_added = mManagedCursor.getLong( mManagedCursor.getColumnIndex( MediaStore.Images.ImageColumns.DATE_ADDED)); // 추가 날짜. 초단위
-
+                if(date_taken > date_add){
+                    date_taken = date_add;
+                }
+                if(date_taken > date_modify){
+                    date_taken = date_modify;
+                }
                 Calendar cal = new GregorianCalendar();
                 cal.setTimeInMillis(date_taken);
                 Date d = cal.getTime();
