@@ -457,6 +457,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             startActivityForResult(signInIntent, RC_SIGN_IN);
         }catch(Exception e){
             e.printStackTrace();
+            ToastUtil.show(MainActivity.this,"Login Failed... Try Again");
+
             Log.e("SignIn", "MainActivity-signin : Google Sign In Failed!!");
             return;
         }
@@ -481,11 +483,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                         .into(imgProfilePic);
 
             }
+            ToastUtil.show(MainActivity.this,"Login Success!!");
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("GoogleLogIn", "signInResult:failed code=" + e.getStatusCode());
+            ToastUtil.show(MainActivity.this,"Login Failed");
         }finally{
             updateUI();
         }
