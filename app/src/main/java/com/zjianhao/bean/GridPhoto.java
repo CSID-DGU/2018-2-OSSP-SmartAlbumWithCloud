@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class GridPhoto implements Comparable<GridPhoto>{
     private String dateLabel;
+    private String locLabel;
     private List<Photo> photos;
 
     public String getDateLabel() {
@@ -41,9 +42,4 @@ public class GridPhoto implements Comparable<GridPhoto>{
         }
         return 0;
     }
-
-
-
-
-
 }

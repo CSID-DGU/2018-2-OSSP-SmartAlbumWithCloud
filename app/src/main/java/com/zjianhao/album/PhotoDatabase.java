@@ -9,4 +9,5 @@ public class PhotoDatabase
    public String path;
    public String location;
    public String date;
+   public int id;
 }

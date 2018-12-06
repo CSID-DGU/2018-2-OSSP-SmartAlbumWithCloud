@@ -123,7 +123,6 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
             mMap.addMarker(markerOptions).showInfoWindow();
 
 
-
         }
         //mMap.addMarker(new MarkerOptions().position(seoul).title("Marker in Seoul")); <--마커를 찍고 싶다면 사
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,8));//첫번째 인자는 중심이 되는 좌표, 두번째 인자는 줌 레벨
@@ -159,7 +158,7 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
                 String mini_thumb_magic = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.MINI_THUMB_MAGIC)); // 작은 썸네일
                 String orientation = mManagedCursor.getString( mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.ORIENTATION)); // 사진의 방향. 0, 90, 180, 270
                 String picasa_id =mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.PICASA_ID)); // 피카사에서 매기는 ID
-                String id = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)); // 레코드의 PK
+                int id = mManagedCursor.getInt(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)); // 레코드의 PK
                 String data = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)); // 데이터 스트림. 파일의 경로
                 String title = mManagedCursor.getString(mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.TITLE)); // 제목
                 String display_name = mManagedCursor.getString( mManagedCursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)); // 파일 표시명
@@ -174,6 +173,7 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
                 String date = sd.format(d);//극혐숫자로 반환된 datetaken을 날짜로 바꾸어주는식
 
                 PhotoDatabase pdb = new PhotoDatabase();
+                pdb.id = id;
                 pdb.date=date;
                 pdb.path=data;
                 pdb.title=display_name;
