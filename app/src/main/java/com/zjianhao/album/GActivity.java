@@ -31,12 +31,11 @@ public class GActivity extends AppCompatActivity {
         this.bitmapList = new ArrayList<Bitmap>();
         photoDatabase = getIntent().getParcelableArrayListExtra("key");
         String testText ="";
-        for(PhotoDatabase pdb : photoDatabase)
-
-        {
-            testText +=pdb.path+"\n";
-        }
-        Toast.makeText(getApplicationContext(), testText, Toast.LENGTH_LONG).show();
+       //for(PhotoDatabase pdb : photoDatabase)
+       // {
+        //    testText +=pdb.path+"\n";
+       // }
+       // Toast.makeText(getApplicationContext(), testText, Toast.LENGTH_LONG).show();
         if(!(photoDatabase==null))
         for(PhotoDatabase pdb : photoDatabase)
             try {
@@ -47,7 +46,7 @@ public class GActivity extends AppCompatActivity {
           }
            catch(Exception e)
             {
-                String text = "Exception Throwed";
+                String text = "Exception Throwed : " + e.getMessage();
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG)
                         .show();
             }
@@ -56,10 +55,8 @@ public class GActivity extends AppCompatActivity {
 
     private Bitmap urlImageToBitmap(String imageUrl) throws Exception {
         Bitmap result = null;
-        URL url = new URL(imageUrl);
-        if(url != null) {
-            result = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        }
+        Bitmap bmp = BitmapFactory.decodeFile(imageUrl);
+        result = Bitmap.createScaledBitmap(bmp,300,300,true);
         return result;
     }
 }
