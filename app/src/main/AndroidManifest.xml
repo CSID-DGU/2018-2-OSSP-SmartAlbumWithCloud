@@ -25,6 +25,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <receiver android:name=".album.AlarmReceiver">
+            <intent-filter>
+                <action android:name="com.zjianhao.album.ALARM_START" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".album.MainActivity"
             android:windowSoftInputMode="adjustResize">

@@ -1,7 +1,12 @@
 package com.zjianhao.album;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
@@ -33,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,6 +62,7 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
     private Spinner s;
     TimePicker mTimePicker;
     public static DriveId myDriveId = null;
+    BroadcastReceiver broadcastReceiver;
 
     private CheckBox[] checkBoxes;
     private CheckBox checkBox_MON, checkBox_TUE, checkBox_WED, checkBox_THU,
@@ -126,6 +133,91 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
         //Toast.makeText(this, mySetting.getTimePicker_HourOfDay()+ " " + mySetting.getTimePicker_Minute(), Toast.LENGTH_SHORT).show();   //시간 잘 받아지는지 확인용
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        this.unregisterReceiver(broadcastReceiver);
+    }
+    /* 백그라운드 예약 설정 */
+    public void click_reserve(View view){
+        mySetting.clear_Selected_Upload_Day(); // 배열 비우기
+        for(int i=0; i<checkBoxes.length; i++) { // 만약 체크가 되어있는 놈들이면~ 배열에다가 add해줌
+            if (checkBoxes[i].isChecked()) mySetting.add_Selected_Upload_Day(mySetting.getCheckbox(i));
+        }
+
+        //값들어오는거 확인용
+        String str = "";
+        for(int i=0; i<mySetting.size_Selected_Upload_Day(); i++) {
+            str += mySetting.get_Selected_Upload_Day(i);
+        }
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+
+
+
+        EditText editText = (EditText) findViewById(R.id.cloud_Directory);  // editText의 값을 받아옴
+
+        if(mySetting.setCloud_directory(editText.getText().toString())) {  // 받아온 값을 string변수에 저장
+            Log.d("Cloud Directory Set : ", mySetting.getCloud_directory());
+        }else {
+            Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        editText = (EditText) findViewById(R.id.local_Directory);
+        if(mySetting.setLocal_directory(editText.getText().toString())){
+            Log.d("Local Directory : ", mySetting.getLocal_directory());
+        }else{
+            Toast.makeText(getApplicationContext(),"Check Your Local Directory",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(mySetting.getSort_type() == 0){
+            Toast.makeText(getApplicationContext(),"Check Your Sort Option",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(mySetting.getSort_type()==SETTING_TIME && mySetting.getSort_time_type() == 0){
+            Toast.makeText(getApplicationContext(),"Check Your Time SubSort Option",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Calendar mcalendar = Calendar.getInstance();
+        mcalendar.set(Calendar.HOUR_OF_DAY, mySetting.getTimePicker_HourOfDay()) ;
+        mcalendar.set(Calendar.MINUTE, mySetting.getTimePicker_Minute());
+        mcalendar.set(Calendar.SECOND, 0);
+
+        broadcastReceiver = new AlarmReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        this.registerReceiver(broadcastReceiver, filter);
+
+        mySetting.saveFile();
+
+        Intent mAlarmIntent = new Intent("com.zjianhao.album.ALARM_START");
+        PendingIntent mPendingItent =
+                PendingIntent.getBroadcast(
+                        this,
+                        1,
+                        mAlarmIntent,
+                        PendingIntent.FLAG_CANCEL_CURRENT
+                );
+        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mAlarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                mcalendar.getTimeInMillis(),
+                mPendingItent
+        );
+        AlarmReceiver.mySetting = mySetting;
+        Toast.makeText(getApplicationContext(), "Setting Saved",Toast.LENGTH_LONG).show();
+        finish();
+       /*
+        if(myDriveId != null) {
+            Log.d("Cloud Directory Set : ", myDriveId.toString());
+            Intent serviceIntent = new Intent(this,FileUploaderService.class);
+            startService(serviceIntent);
+        }else{
+            Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
+    }
+
     /* 설정값 저장하기 - 박상혁 */
     public void click_save(View view) {
 
@@ -179,6 +271,7 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
             Toast.makeText(getApplicationContext(), "Check Your Cloud Directory!", Toast.LENGTH_SHORT).show();
             return;
         }
+        FileUploaderService.mySetting = mySetting;
 
         finish(); // Return to Previous Page
     }

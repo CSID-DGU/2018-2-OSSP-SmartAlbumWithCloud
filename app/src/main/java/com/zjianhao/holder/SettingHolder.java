@@ -2,9 +2,15 @@ package com.zjianhao.holder;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class SettingHolder {
+    public static String fileDir;
     public static final int SETTING_TIME = 1;
     public static final int SETTING_LOCATION = 2;
     public static final int SUB_SETTING_YEAR = 1;
@@ -163,5 +169,41 @@ public class SettingHolder {
                 Log.v("checkBox error", "checkbox error");
                 return null;
         }
+    }
+    public void saveFile(){
+        try{
+            File f = new File("./setting.txt");
+
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(this.getCloud_directory()+"\n");
+            bw.write(this.getLocal_directory()+"\n");
+            bw.write(this.getSort_time_type()+"\n");
+            bw.write(this.getSort_type()+"\n");
+
+            bw.close();
+            fw.close();
+        }catch(Exception e){
+
+        }
+    }
+    public SettingHolder readFile(){
+        try{
+            File f = new File("./setting.txt");
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            this.setCloud_directory(br.readLine());
+            this.setLocal_directory(br.readLine());
+            this.setSort_time_type(Integer.parseInt(br.readLine()));
+            this.setSort_type(Integer.parseInt(br.readLine()));
+
+            br.close();
+            fr.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return this;
     }
 }

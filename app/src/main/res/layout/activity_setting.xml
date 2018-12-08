@@ -259,7 +259,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/button_style"
-            android:onClick="click_save"
+            android:onClick="click_reserve"
             android:text="Save Settings"
             android:textColor="@color/white" />
 

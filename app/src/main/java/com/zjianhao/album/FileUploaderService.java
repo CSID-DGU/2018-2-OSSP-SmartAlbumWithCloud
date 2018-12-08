@@ -1,5 +1,6 @@
 package com.zjianhao.album;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -25,45 +26,15 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveClient;
-import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveFolder;
-import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.DriveResourceClient;
-import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-import com.zjianhao.R;
-import com.zjianhao.fragments.AlbumFragment;
 import com.zjianhao.holder.SettingHolder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -107,8 +78,12 @@ public class FileUploaderService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent){
-        mySetting = settingActivity.mySetting;
-
+        // wait for mySetting to arrive
+        if(mySetting == null){
+            mySetting = new SettingHolder();
+            mySetting.readFile();
+        }
+        //mySetting = settingActivity.mySetting;
 
         //DriveFolder df = createFolder("Temp아아아");
         Log.d("FileUploaderService", "Normal Execution");
@@ -120,9 +95,6 @@ public class FileUploaderService extends IntentService {
         //uploadFile(new File("/storage/emulated/0/DCIM/Camera/IMG_20181126_152939.jpg"));
         onDestroy();
     }
-
-
-
 
     public static char[] byteToChar(byte[] array) {
 
