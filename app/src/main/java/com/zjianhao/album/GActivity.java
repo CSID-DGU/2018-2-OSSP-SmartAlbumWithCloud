@@ -55,8 +55,11 @@ public class GActivity extends AppCompatActivity {
 
     private Bitmap urlImageToBitmap(String imageUrl) throws Exception {
         Bitmap result = null;
-        Bitmap bmp = BitmapFactory.decodeFile(imageUrl);
-        result = Bitmap.createScaledBitmap(bmp,300,300,true);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 5;
+        Bitmap bmp = BitmapFactory.decodeFile(imageUrl,options);
+
+        result = Bitmap.createScaledBitmap(bmp,300,300,true);//썸네일사진의 해상도 조절
         return result;
     }
 }
