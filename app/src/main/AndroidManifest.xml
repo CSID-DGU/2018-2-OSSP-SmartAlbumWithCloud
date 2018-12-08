@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zjianhao">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/><!--18.11.18 두 줄 추가  by ljh(geocoding) 내위치정보 얻기 위함-->
-    <uses-permission android:name="android.permission.INTERNET"/> <!--18.11.18 두 줄 추가 by ljh(geocoding)구글 서버 접근 위함-->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 18.11.18 두 줄 추가  by ljh(geocoding) 내위치정보 얻기 위함 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 18.11.18 두 줄 추가 by ljh(geocoding)구글 서버 접근 위함 -->
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <permission
         android:name="com.example.googlemaptest.permission.MAPS_RECEIVE"
@@ -66,9 +66,10 @@
         <activity android:name=".album.QueryFilesInFolderActivity" />
 
         <service android:name=".service.UploadService" />
-        <service android:name=".album.FileUploaderService"/>
+        <service android:name=".album.FileUploaderService" />
 
-        <activity android:name=".album.ljhtestActivity"></activity>
+        <activity android:name=".album.ljhtestActivity" />
+        <activity android:name=".album.GActivity"></activity>
     </application>
 
 </manifest>

@@ -68,7 +68,7 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
 
     public void clickClose(View v)
     {
-        Intent intent = new Intent(this,ljhtestActivity.class);
+        Intent intent = new Intent(this,GActivity.class);
         startActivity(intent);
     }//테스트용 액티비티와 연결되게 함.
 
@@ -121,18 +121,19 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
             Bitmap bm=createUserBitmap(pdb.path);
             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bm));
             mMap.addMarker(markerOptions).showInfoWindow();
-
-
         }
+
         //mMap.addMarker(new MarkerOptions().position(seoul).title("Marker in Seoul")); <--마커를 찍고 싶다면 사
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,8));//첫번째 인자는 중심이 되는 좌표, 두번째 인자는 줌 레벨
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             public boolean onMarkerClick(Marker marker) {
-                String text = "[마커 클릭 이벤트] latitude ="
-                        + marker.getPosition().latitude + ", longitude ="
-                        + marker.getPosition().longitude;
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG)
-                        .show();
+                Intent intent1 = new Intent(AlbumMapActivity.this, GActivity.class);
+                String title = marker.getTitle();
+                intent1.putExtra("markertitle", title);
+                intent1.putParcelableArrayListExtra("key",photoListByLoc.get(marker.getTitle()));
+                startActivity(intent1);
+               String text = "Map.get("+ marker.getTitle() + ") called..";
+                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 return false;
             }
         });
