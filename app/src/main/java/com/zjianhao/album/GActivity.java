@@ -13,6 +13,8 @@ import android.graphics.*;
 import java.io.IOException;
 import java.util.*;
 import java.net.*;
+
+import android.view.Display;
 import android.widget.*;
 public class GActivity extends AppCompatActivity {
 
@@ -41,8 +43,7 @@ public class GActivity extends AppCompatActivity {
             try {
                 bitmapList.add(urlImageToBitmap(pdb.path));
                 String text = pdb.path + "ADDED";
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
           }
            catch(Exception e)
             {
@@ -56,10 +57,12 @@ public class GActivity extends AppCompatActivity {
     private Bitmap urlImageToBitmap(String imageUrl) throws Exception {
         Bitmap result = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
+
         options.inSampleSize = 5;
         Bitmap bmp = BitmapFactory.decodeFile(imageUrl,options);
 
         result = Bitmap.createScaledBitmap(bmp,300,300,true);//썸네일사진의 해상도 조절
+
         return result;
     }
 }

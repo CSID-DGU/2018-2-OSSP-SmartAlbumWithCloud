@@ -6,6 +6,7 @@ import java.util.*;
 import android.graphics.*;
 import android.view.*;
 import android.content.*;
+import android.view.WindowManager;
 
 public class ImageAdapter extends BaseAdapter {
 
@@ -33,7 +34,14 @@ public class ImageAdapter extends BaseAdapter {
         ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(this.context);
-            imageView.setLayoutParams(new GridView.LayoutParams(700,700 ));//사진 크기 수정
+            WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+
+
+            imageView.setLayoutParams(new GridView.LayoutParams(width/3,width/3 ));//사진 크기 수정
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else {
             imageView = (ImageView) convertView;
