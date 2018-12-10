@@ -99,15 +99,13 @@ public class DirFileManager
         myDriveId = settingActivity.myDriveId;
 
         makeDir(path,strSet);
-
+        ArrayList<String> list = new ArrayList<String>();
         for(String str : strSet)
         {
-            ArrayList<String> list = new ArrayList<String>();
             DriveFolder df= createFolder(str);
             int size = map.get(str).size();
             for(int i = 0; i<size; i++)
             {
-
                 String inPath = map.get(str).get(i).path;
                 String outPath=path+"/"+str+"/"+map.get(str).get(i).title;
                 if(list.contains(map.get(str).get(i).title) == false) {
