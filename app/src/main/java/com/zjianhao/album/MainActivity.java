@@ -389,29 +389,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawerLayout.closeDrawers();
         switch (item.getItemId()){
 
-            case R.id.nav_upload_photo:
-                AppContext application = (AppContext) getApplication();
-                if(mGoogleSignInClient != null){
-                    /*
 
-
-                    Google Sync 기능 넣기
-                     */
-                }else {
-                    ToastUtil.show(this,"Please login first");
-                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                            .requestEmail()
-                            .build();
-                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-                    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                    startActivityForResult(signInIntent, RC_SIGN_IN);
-                    //Intent intent1 = new Intent(this,.class);
-                    //startActivity(intent1);
-                }
-
-
-                break;
             case R.id.nav_search_photo:
                 intent = new Intent(this, AdvancedSearchAty.class);
                 startActivity(intent);

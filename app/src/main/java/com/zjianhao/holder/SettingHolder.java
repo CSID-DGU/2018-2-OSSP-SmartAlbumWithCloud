@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SettingHolder {
     public static String fileDir;
@@ -22,8 +23,8 @@ public class SettingHolder {
     private int sort_time_type = SUB_SETTING_YEAR;
     private int timePicker_HourOfDay;  // 업로드 시간설정 할 때, 선택한 Hour을 저장하는 변수
     private int timePicker_Minute; // 선택한 Minute를 저장하는 변수
-    private ArrayList Selected_Upload_Day = new ArrayList();  // 체크된 요일들을 저장할 arr
-    private String MON = "MON", TUE = "TUE", WED = "WED", THU = "THU", FRI = "FRI", SAT = "SAT", SUN = "SUN";
+    public ArrayList Selected_Upload_Day = new ArrayList();  // 체크된 요일들을 저장할 arr
+    private static final String MON = "MON", TUE = "TUE", WED = "WED", THU = "THU", FRI = "FRI", SAT = "SAT", SUN = "SUN";
 
     public void clear_Selected_Upload_Day() { // Arraylist 클리어
         Selected_Upload_Day.clear();
@@ -38,6 +39,26 @@ public class SettingHolder {
         return Selected_Upload_Day.get(index);
     }
 
+    public int get_int_Selected_Upload_Day(int index){
+        String str = (String)get_Selected_Upload_Day(index);
+        switch(str){
+            case MON:
+                return Calendar.MONDAY;
+            case TUE:
+                return Calendar.TUESDAY;
+            case WED:
+                return Calendar.WEDNESDAY;
+            case THU:
+                return Calendar.THURSDAY;
+            case FRI:
+                return Calendar.FRIDAY;
+            case SAT:
+                return Calendar.SATURDAY;
+            case SUN:
+                return Calendar.SUNDAY;
+        }
+        return -1;
+    }
     // 타임피커에서 hour의 getter, setter
     public int getTimePicker_HourOfDay() {
         return timePicker_HourOfDay;

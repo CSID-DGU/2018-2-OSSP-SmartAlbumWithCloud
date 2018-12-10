@@ -6,11 +6,6 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_upload_photo"
-            android:icon="@drawable/ic_file_upload_white_24dp"
-            android:title="@string/upload_img" />
-
-        <item
             android:id="@+id/nav_search_photo"
             android:icon="@drawable/ic_search_white_24dp"
             android:title="@string/advanced_finding" />

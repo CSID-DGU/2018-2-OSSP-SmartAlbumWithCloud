@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -101,16 +102,21 @@ public class DirFileManager
 
         for(String str : strSet)
         {
+            ArrayList<String> list = new ArrayList<String>();
             DriveFolder df= createFolder(str);
             int size = map.get(str).size();
             for(int i = 0; i<size; i++)
             {
+
                 String inPath = map.get(str).get(i).path;
                 String outPath=path+"/"+str+"/"+map.get(str).get(i).title;
-                if(inPath.equals(outPath)==false) { // Filter out same file
-                    copyFile(inPath, outPath);
-                    uploadFile(df, new File(outPath));
-                    Log.d("DIRDIR:",inPath+"\t\t"+outPath);
+                if(list.contains(map.get(str).get(i).title) == false) {
+                    if (inPath.equals(outPath) == false) { // Filter out same file
+                        list.add(map.get(str).get(i).title);
+                        copyFile(inPath, outPath);
+                        uploadFile(df, new File(outPath));
+                        Log.d("DIRDIR:", inPath + "\t\t" + outPath);
+                    }
                 }
             }
         }

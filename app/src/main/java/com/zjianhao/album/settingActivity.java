@@ -136,7 +136,8 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        this.unregisterReceiver(broadcastReceiver);
+        if(broadcastReceiver != null)
+            this.unregisterReceiver(broadcastReceiver);
     }
     /* 백그라운드 예약 설정 */
     public void click_reserve(View view){
@@ -179,31 +180,37 @@ public class settingActivity extends Activity implements TimePicker.OnTimeChange
             return;
         }
 
-        Calendar mcalendar = Calendar.getInstance();
-        mcalendar.set(Calendar.HOUR_OF_DAY, mySetting.getTimePicker_HourOfDay()) ;
-        mcalendar.set(Calendar.MINUTE, mySetting.getTimePicker_Minute());
-        mcalendar.set(Calendar.SECOND, 0);
+        for(int i =0;i<mySetting.Selected_Upload_Day.size();i++){
 
-        broadcastReceiver = new AlarmReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-        this.registerReceiver(broadcastReceiver, filter);
+            Calendar mcalendar = Calendar.getInstance();
+            mcalendar.set(Calendar.HOUR_OF_DAY, mySetting.getTimePicker_HourOfDay()) ;
+            mcalendar.set(Calendar.MINUTE, mySetting.getTimePicker_Minute());
+            mcalendar.set(Calendar.SECOND, 0);
+            mcalendar.set(Calendar.DAY_OF_WEEK, mySetting.get_int_Selected_Upload_Day(i));
 
-        mySetting.saveFile();
+            broadcastReceiver = new AlarmReceiver();
+            IntentFilter filter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+            this.registerReceiver(broadcastReceiver, filter);
 
-        Intent mAlarmIntent = new Intent("com.zjianhao.album.ALARM_START");
-        PendingIntent mPendingItent =
-                PendingIntent.getBroadcast(
-                        this,
-                        1,
-                        mAlarmIntent,
-                        PendingIntent.FLAG_CANCEL_CURRENT
-                );
-        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        mAlarmManager.set(
-                AlarmManager.RTC_WAKEUP,
-                mcalendar.getTimeInMillis(),
-                mPendingItent
-        );
+            FileUploaderService.mySetting = mySetting;
+            mySetting.saveFile();
+
+            Intent mAlarmIntent = new Intent("com.zjianhao.album.ALARM_START");
+            PendingIntent mPendingItent =
+                    PendingIntent.getBroadcast(
+                            this,
+                            1,
+                            mAlarmIntent,
+                            PendingIntent.FLAG_CANCEL_CURRENT
+                    );
+            AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    mcalendar.getTimeInMillis(),
+                    mPendingItent
+            );
+
+        }
         AlarmReceiver.mySetting = mySetting;
         Toast.makeText(getApplicationContext(), "Setting Saved",Toast.LENGTH_LONG).show();
         finish();

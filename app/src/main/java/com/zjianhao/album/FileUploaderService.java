@@ -83,6 +83,7 @@ public class FileUploaderService extends IntentService {
             mySetting = new SettingHolder();
             mySetting.readFile();
         }
+
         //mySetting = settingActivity.mySetting;
 
         //DriveFolder df = createFolder("Temp아아아");
