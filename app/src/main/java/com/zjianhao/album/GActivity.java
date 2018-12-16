@@ -63,6 +63,8 @@ public class GActivity extends AppCompatActivity {
 
         result = Bitmap.createScaledBitmap(bmp,300,300,true);//썸네일사진의 해상도 조절
 
+
+
         return result;
     }
 }

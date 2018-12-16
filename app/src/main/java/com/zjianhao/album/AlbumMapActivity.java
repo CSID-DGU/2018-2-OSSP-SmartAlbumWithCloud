@@ -68,8 +68,9 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
 
     public void clickClose(View v)
     {
-        Intent intent = new Intent(this,GActivity.class);
-        startActivity(intent);
+        finish();
+//        Intent intent = new Intent(this,GActivity.class);
+////        startActivity(intent);
     }//테스트용 액티비티와 연결되게 함.
 
     /**

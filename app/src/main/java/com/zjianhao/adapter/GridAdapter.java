@@ -98,8 +98,4 @@ public class GridAdapter extends BaseAdapter {
         imageLoader.displayImage(photos.get(position).getImgUrl(),imageView);
         return imageView;
     }
-
-
-
-
 }
