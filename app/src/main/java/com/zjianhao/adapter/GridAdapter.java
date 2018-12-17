@@ -75,7 +75,7 @@ public class GridAdapter extends BaseAdapter {
         ImageView imageView;
         if (convertView == null) {
             imageView = new ImageView(context);
-            int w = width/3-8;
+            int w = (width/3)-8;
             imageView.setLayoutParams(new GridView.LayoutParams(w, w));//设置ImageView对象布局
 
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

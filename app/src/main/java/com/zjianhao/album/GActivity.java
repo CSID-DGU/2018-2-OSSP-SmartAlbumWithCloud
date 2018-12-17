@@ -43,13 +43,13 @@ public class GActivity extends AppCompatActivity {
             try {
                 bitmapList.add(urlImageToBitmap(pdb.path));
                 String text = pdb.path + "ADDED";
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
           }
            catch(Exception e)
             {
                 String text = "Exception Throwed : " + e.getMessage();
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG)
-                        .show();
+//                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG)
+//                        .show();
             }
         this.imageGrid.setAdapter(new ImageAdapter(this, this.bitmapList));
     }
@@ -58,12 +58,10 @@ public class GActivity extends AppCompatActivity {
         Bitmap result = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
 
-        options.inSampleSize = 5;
+        options.inSampleSize = 4;
         Bitmap bmp = BitmapFactory.decodeFile(imageUrl,options);
 
-        result = Bitmap.createScaledBitmap(bmp,300,300,true);//썸네일사진의 해상도 조절
-
-
+        result = Bitmap.createScaledBitmap(bmp,250,250,true);//썸네일사진의 해상도 조절
 
         return result;
     }
