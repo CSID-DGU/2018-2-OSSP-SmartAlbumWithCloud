@@ -48,7 +48,7 @@
     <color name="actionsheet_gray">#8F8F8F</color>
     <color name="common_title_bg">#aa111213</color>
     <color name="primary_title_text_color">#ffeeeeee</color>
-    <color name="album_item_bg">#fffcfcfd</color>
+    <color name="album_item_bg">#fcfcfd</color>
 
     <!-- 登陆界面 -->
     <color name="login_login_button_enable_color">#fffded</color>

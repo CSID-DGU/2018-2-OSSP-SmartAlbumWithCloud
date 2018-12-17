@@ -30,6 +30,7 @@
                 <action android:name="com.zjianhao.album.ALARM_START" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".album.MainActivity"
             android:windowSoftInputMode="adjustResize">
@@ -74,7 +75,9 @@
         <service android:name=".album.FileUploaderService" />
 
         <activity android:name=".album.ljhtestActivity" />
-        <activity android:name=".album.GActivity"></activity>
+        <activity android:name=".album.GActivity" />
+        <activity android:name=".album.FulImageActivity" />
+        <activity android:name=".album.FullImageActivity"></activity>
     </application>
 
 </manifest>

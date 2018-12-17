@@ -133,7 +133,7 @@ public class AlbumMapActivity extends FragmentActivity implements OnMapReadyCall
                 intent1.putExtra("markertitle", title);
                 intent1.putParcelableArrayListExtra("key",photoListByLoc.get(marker.getTitle()));
                 startActivity(intent1);
-               String text = "Map.get("+ marker.getTitle() + ") called..";
+               //String text = "Map.get("+ marker.getTitle() + ") called..";
                 //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 return false;
             }

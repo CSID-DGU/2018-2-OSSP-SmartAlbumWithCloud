@@ -11,6 +11,8 @@ public class PhotoDatabase implements Parcelable
    public PhotoDatabase(Parcel in) {
       this.path = in.readString();
       this.id = in.readInt();
+      this.date = in.readString();
+      this.title = in.readString();
    }
    public double latitude;
    public double longitude;
@@ -30,6 +32,8 @@ public class PhotoDatabase implements Parcelable
    public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(this.path);
       dest.writeInt(this.id);
+      dest.writeString(this.date);
+      dest.writeString(this.title);
    }
 
    @SuppressWarnings("rawtypes")
