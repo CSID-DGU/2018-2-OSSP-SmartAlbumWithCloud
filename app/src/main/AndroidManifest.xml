@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 18.11.18 두 줄 추가  by ljh(geocoding) 내위치정보 얻기 위함 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 18.11.18 두 줄 추가 by ljh(geocoding)구글 서버 접근 위함 -->
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -21,6 +20,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".album.DLaty"
+            android:label="@string/title_activity_dlaty"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -30,6 +34,7 @@
                 <action android:name="com.zjianhao.album.ALARM_START" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".album.MainActivity"
             android:windowSoftInputMode="adjustResize">
@@ -74,7 +79,7 @@
         <service android:name=".album.FileUploaderService" />
 
         <activity android:name=".album.ljhtestActivity" />
-        <activity android:name=".album.GActivity"></activity>
+        <activity android:name=".album.GActivity" />
     </application>
 
 </manifest>

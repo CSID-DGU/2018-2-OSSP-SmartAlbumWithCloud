@@ -52,7 +52,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:orientation="vertical"
-            android:layout_toLeftOf="@+id/photo_delete_ll"
+            android:layout_toLeftOf="@+id/photo_detail_ll"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
             >
@@ -74,41 +74,13 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/photo_delete_ll"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:layout_centerInParent="true"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_delete_white_18dp"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/delete"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/photo_detail_ll"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:orientation="vertical"
-            android:layout_toRightOf="@+id/photo_delete_ll"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
+            android:layout_centerInParent="true"
             >
 
             <ImageView
@@ -125,6 +97,34 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
 
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/photo_DL_I"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/photo_detail_ll"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_photo_white_18dp"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/DL"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textAlignment="center"
                 />
 
         </LinearLayout>
