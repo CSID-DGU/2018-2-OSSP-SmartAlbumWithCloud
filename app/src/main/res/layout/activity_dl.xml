@@ -48,34 +48,7 @@
         >
 
         <LinearLayout
-            android:id="@+id/photo_send_ll"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toStartOf="@+id/photo_detail_ll"
-            android:layout_toLeftOf="@+id/photo_detail_ll"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_send_white_18dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/send"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/photo_detail_ll"
+            android:id="@+id/send_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:orientation="vertical"
@@ -87,47 +60,17 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_photo_white_18dp"
+                android:src="@drawable/ic_send_white_18dp"
                 android:layout_gravity="center_horizontal"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="@string/detail"
+                android:text="@string/send"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
 
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/delete_object"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_toEndOf="@+id/photo_detail_ll"
-            android:layout_toRightOf="@+id/photo_detail_ll"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_photo_white_18dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/delete_object"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:textSize="12dp"
                 />
 
         </LinearLayout>
