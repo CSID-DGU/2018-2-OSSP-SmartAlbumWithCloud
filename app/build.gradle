@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.application'
 
 android {
@@ -45,4 +46,6 @@ dependencies {
     implementation project(path: ':multi-image-selector')
     annotationProcessor 'com.jakewharton:butterknife:5.1.1'
     implementation 'com.github.guardian:Option:-SNAPSHOT'
+
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
 }

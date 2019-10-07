@@ -20,7 +20,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
 
+=======
+        <activity
+            android:name=".album.DLaty"
+            android:label="@string/title_activity_dlaty"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -78,7 +85,10 @@
 
         <activity android:name=".album.ljhtestActivity" />
         <activity android:name=".album.GActivity" />
+<<<<<<< HEAD
         <activity android:name=".album.FullImageActivity" />
+=======
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
     </application>
 
 </manifest>

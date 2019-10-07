@@ -51,6 +51,11 @@
             android:id="@+id/photo_send_ll"
             android:layout_width="50dp"
             android:layout_height="50dp"
+<<<<<<< HEAD
+=======
+            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/photo_detail_ll"
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
             android:layout_centerVertical="true"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
@@ -73,6 +78,7 @@
                 android:textColor="@color/white" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/photo_detail_ll"
@@ -103,9 +109,17 @@
         </LinearLayout>
 
         <LinearLayout
+<<<<<<< HEAD
             android:id="@+id/delete_object"
             android:layout_width="50dp"
             android:layout_height="50dp"
+=======
+            android:id="@+id/photo_DL_I"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/photo_detail_ll"
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
             android:layout_centerVertical="true"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
@@ -122,12 +136,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="@string/delete_object"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:textSize="12dp"
+=======
+                android:textColor="@color/white"
+                android:text="@string/DL"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textAlignment="center"
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
                 />
 
         </LinearLayout>

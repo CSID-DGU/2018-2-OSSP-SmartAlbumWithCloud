@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zjianhao.R;
+import com.zjianhao.album.DLaty;
 import com.zjianhao.bean.Photo;
 import com.zjianhao.view.TouchImageView;
 
@@ -38,6 +39,11 @@ public class PhotoDetailAty extends Activity {
     TextView photoName;
     @InjectView(R.id.photo_send_ll)
     LinearLayout photoSendLl;
+<<<<<<< HEAD
+=======
+    @InjectView(R.id.photo_DL_I)
+    LinearLayout photo_DL_I;
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
     @InjectView(R.id.photo_detail_ll)
     LinearLayout photoDetailLl;
     @InjectView(R.id.delete_object)
@@ -69,7 +75,11 @@ public class PhotoDetailAty extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
+<<<<<<< HEAD
     @OnClick({R.id.photo_send_ll, R.id.photo_detail_ll,R.id.photo_detail_back, R.id.photo_detail_iv, R.id.delete_object})
+=======
+    @OnClick({R.id.photo_send_ll, R.id.photo_DL_I, R.id.photo_detail_ll,R.id.photo_detail_back, R.id.photo_detail_iv})
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -83,9 +93,14 @@ public class PhotoDetailAty extends Activity {
                 shareSingleImage();
 
                 break;
+<<<<<<< HEAD
             case R.id.delete_object:
                 intent = new Intent();
                 intent.setClass(this, Photo_dlAty.class);
+=======
+            case R.id.photo_DL_I:
+                intent = new Intent(this, DLaty.class);
+>>>>>>> 65528eb649a3972ee3d68673670a85542059b2f6
                 intent.putExtra("photo", photo);
                 startActivity(intent);
                 break;
