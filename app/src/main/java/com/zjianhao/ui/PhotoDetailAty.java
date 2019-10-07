@@ -38,10 +38,10 @@ public class PhotoDetailAty extends Activity {
     TextView photoName;
     @InjectView(R.id.photo_send_ll)
     LinearLayout photoSendLl;
-    @InjectView(R.id.photo_delete_ll)
-    LinearLayout photoDeleteLl;
     @InjectView(R.id.photo_detail_ll)
     LinearLayout photoDetailLl;
+    @InjectView(R.id.delete_object)
+    LinearLayout deleteobject;
     private Photo photo;
 
     private ImageLoader imageloader;
@@ -69,8 +69,9 @@ public class PhotoDetailAty extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.photo_send_ll, R.id.photo_delete_ll, R.id.photo_detail_ll,R.id.photo_detail_back, R.id.photo_detail_iv})
+    @OnClick({R.id.photo_send_ll, R.id.photo_detail_ll,R.id.photo_detail_back, R.id.photo_detail_iv, R.id.delete_object})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
 
             case R.id.photo_detail_back:
@@ -82,15 +83,20 @@ public class PhotoDetailAty extends Activity {
                 shareSingleImage();
 
                 break;
-            case R.id.photo_delete_ll:
-                showDeleteDialog(photo.getImgUrl());
+            case R.id.delete_object:
+                intent = new Intent();
+                intent.setClass(this, Photo_dlAty.class);
+                intent.putExtra("photo", photo);
+                startActivity(intent);
                 break;
+//            case R.id.photo_delete_ll:
+//                showDeleteDialog(photo.getImgUrl());
+//                break;
 
             case R.id.photo_detail_ll:
-                Intent intent = new Intent(this,PhotoInfoAty.class);
+                intent = new Intent(this,PhotoInfoAty.class);
                 intent.putExtra("photo",photo);
                 startActivity(intent);
-
                 break;
         }
     }
