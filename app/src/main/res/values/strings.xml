@@ -1,5 +1,5 @@
 <resources>
-
+    <string name="detect">Detect Object</string>
     <string name="delete_object">Delete Object</string>
     <string name="app_name">Smart Album with Cloud </string>
         <!--Login Module-->
