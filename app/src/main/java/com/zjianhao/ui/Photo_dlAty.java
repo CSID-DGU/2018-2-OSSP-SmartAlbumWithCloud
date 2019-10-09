@@ -50,14 +50,7 @@ public class Photo_dlAty extends AppCompatActivity {
         imageloader.displayImage(photo.getImgUrl(), selected_photo);
         photoName.setText(photo.getName());
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            overridePendingTransition(0, R.anim.activity_exit_anim);
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
     @OnClick({R.id.photo_send, R.id.photo_back})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -67,7 +60,7 @@ public class Photo_dlAty extends AppCompatActivity {
                 overridePendingTransition(0, R.anim.activity_exit_anim);
                 break;
             case R.id.photo_send:
-                Log.e("Sending : ", photo.getLocation());
+                Log.e("Sending : ", photo.getName());
 
 
                 break;
@@ -87,6 +80,13 @@ public class Photo_dlAty extends AppCompatActivity {
         shareIntent.setType("image/*");
         startActivity(Intent.createChooser(shareIntent, "Share to"));
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(0, R.anim.activity_exit_anim);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }
