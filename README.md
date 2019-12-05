@@ -14,6 +14,10 @@ The application will automatically synchronize your beloved pictures to Google D
 
 ## Function<a name="functions"></a>
 
+1. Basic Album views, organization, descriptions
+2. Take photograph & share
+3. Google Login, Logout
+4. Settings : set automatic synchronization to Google Drive Folder
 
 
 ## Usage<a name="usage"></a>
