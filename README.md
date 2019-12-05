@@ -19,9 +19,9 @@ The application will automatically synchronize your beloved pictures to Google D
 ## Usage<a name="usage"></a>
 These are Images of the application in order to help understanding the functions.</br>
 
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.png?raw=true)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/B.png?raw=true)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/C.png?raw=true)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/D.png?raw=true)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/E.png?raw=true)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/F.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/B.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/C.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/D.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/E.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/F.png?raw=true)<br/>
