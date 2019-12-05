@@ -18,7 +18,7 @@ The application will automatically synchronize your beloved pictures to Google D
 2. Take photograph & share
 3. Google Login, Logout
 4. Settings : set automatic synchronization to Google Drive Folder
-
+5. View map-based cluster of images
 
 ## Usage<a name="usage"></a>
 These are Images of the application in order to help understanding the functions.</br>
