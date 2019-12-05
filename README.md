@@ -1,8 +1,27 @@
 # Smart Album with Cloud
 
-Original Open Source Project<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/1.png)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/2.png)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/3.png)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/4.png)<br/>
-![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/5.png)<br/>
+
+## Table of Contents
+- [About](#about)
+- [Functions](#functions)
+- [Usage](#usage)
+
+## About<a name="about"></a>
+
+This android application is an Smart Album Application.
+Its main function is to organize images within the mobile device as well as on your Google Drive.
+The application will automatically synchronize your beloved pictures to Google Drive.
+
+## Function<a name="functions"></a>
+
+
+
+## Usage<a name="usage"></a>
+These are Images of the application in order to help understanding the functions.</br>
+
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/B.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/C.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/D.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/E.png?raw=true)<br/>
+![CSID-DGU](https://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/A.pnghttps://github.com/CSID-DGU/2018-2-OSSP-SmartAlbumWithCloud/blob/master/screenshot/F.png?raw=true)<br/>
